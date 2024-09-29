@@ -39,6 +39,22 @@
                                 <a class="nav-link" href="#">CONTACTO</a>
                             </li>
                         </ul>
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Mostrar botón de logout si el usuario está autenticado -->
+                            @if (Auth::check())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">DASHBOARD</a>
+                                </li>
+                                <li class="nav-item">
+                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        LOGOUT
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
                     </div>
                 </div>
             </nav>
