@@ -19,6 +19,12 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
+    // mostrar habitaciones
+    public function rooms()
+    {
+        return view('admin.rooms');
+    }
+
     // procesa el login
     public function login(Request $request)
     {

@@ -39,19 +39,19 @@
             <div class="card-body">
                 <h4 class="card-title mb-3 text-center">GESTIÓN</h4>
                 <div class="d-grid mb-3">
-                    <a class="btn btn-primary" href="{{ route('admin.habitaciones') }}" 
+                    <a class="btn btn-primary" href="{{ route('admin.rooms') }}" 
                     role="button">HABITACIONES</a>
                 </div>
                 <div class="d-grid mb-3">
-                    <a class="btn btn-primary" href="{{ route('admin.reservas') }}" 
+                    <a class="btn btn-primary" href="{{ route('admin.booking') }}" 
                     role="button">RESERVAS</a>
                 </div>
                 <div class="d-grid mb-3">
-                    <a class="btn btn-primary" href="{{ route('admin.administradores') }}" 
+                    <a class="btn btn-primary" href="{{ route('admin.admins') }}" 
                     role="button">ADMINISTRADORES</a>
                 </div>
                 <div class="d-grid">
-                    <a class="btn btn-primary" href="{{ route('admin.pagos') }}" 
+                    <a class="btn btn-primary" href="{{ route('admin.payments') }}" 
                     role="button">PAGOS</a>
                 </div>
             </div>
