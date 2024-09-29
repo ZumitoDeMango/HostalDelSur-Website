@@ -13,6 +13,12 @@ class AdminController extends Controller
         return view('admin.login');
     }
 
+    // mostrar dashboard
+    public function dashboard()
+    {
+        return view('admin.dashboard');
+    }
+
     // procesa el login
     public function login(Request $request)
     {

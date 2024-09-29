@@ -7,10 +7,14 @@ use App\Http\Controllers\AdminController;
 // rutas home
 Route::match(['get'], '/', [HomeController::class, 'index'])->name('home.index');
 
-// rutas admin
+// rutas login admin
 Route::get('/login', [AdminController::class, 'showLogin'])->name('admin.login');
 Route::post('/login', [AdminController::class, 'login'])->name('admin.login.post');
 Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware('auth')->name('admin.dashboard');
+
+// rutas dashboard admin
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
+Route::get('/dashboard-habitaciones', [AdminController::class, ''])->name('admin.habitaciones')->middleware('auth');
+Route::get('/dashboard-reservas', [AdminController::class, ''])->name('admin.reservas')->middleware('auth');
+Route::get('/dashboard-administradores', [AdminController::class, ''])->name('admin.administradores')->middleware('auth');
+Route::get('/dashboard-pagos', [AdminController::class, ''])->name('admin.pagos')->middleware('auth');
