@@ -4,6 +4,7 @@
         <title>Hostal del Sur</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        {{-- bootstrap --}}
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -15,13 +16,18 @@
         {{-- leaflet maps --}}
         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
+        {{-- link css --}}
+        <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}">
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ route('home.index') }}">HOSTAL DEL SUR</a>
+                    <a class="navbar-brand" href="{{ route('home.index') }}">
+                        <div class="image-container-logo">
+                            <img src="{{ asset('images/logohostal.jpg') }}" class="img-logo">
+                        </div>
+                    </a>
                     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>

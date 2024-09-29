@@ -1,9 +1,7 @@
 @extends('templates.master')
 
 @section('main-content')
-<p>
-    email ejemplo@correo.cl
-    numero celular +56 9 ########
-    numero fijo +56 ## #######
-</p>
+<p>CORREO: Hostaldelsur@gmail.com</p>
+<p>CELULAR Y WHATSAPP: 9 8535 3488</p>
+<p>FONO FIJO: 71 2713 971</p>
 @endsection
