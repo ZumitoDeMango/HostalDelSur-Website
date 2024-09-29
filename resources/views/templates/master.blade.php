@@ -27,16 +27,16 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">QUIENES SOMOS</a>
+                                <a class="nav-link" href="{{ route('home.about') }}">QUIENES SOMOS</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">HABITACIONES</a>
+                                <a class="nav-link" href="{{ route('home.rooms') }}">HABITACIONES</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">UBICACION</a>
+                                <a class="nav-link" href="{{ route('home.location') }}">UBICACION</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">CONTACTO</a>
+                                <a class="nav-link" href="{{ route('home.contact') }}">CONTACTO</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto">

@@ -6,6 +6,10 @@ use App\Http\Controllers\AdminController;
 
 // rutas home
 Route::match(['get'], '/', [HomeController::class, 'index'])->name('home.index');
+Route::match(['get'], '/sobre-nosotros', [HomeController::class, 'about'])->name('home.about');
+Route::match(['get'], '/habitaciones', [HomeController::class, 'rooms'])->name('home.rooms');
+Route::match(['get'], '/ubicacion', [HomeController::class, 'location'])->name('home.location');
+Route::match(['get'], '/contacto', [HomeController::class, 'contact'])->name('home.contact');
 
 // rutas login admin
 Route::get('/login', [AdminController::class, 'showLogin'])->name('admin.login');
