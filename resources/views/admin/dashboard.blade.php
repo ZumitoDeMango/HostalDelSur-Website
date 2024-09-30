@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('main-content')
-<div class="row">
+<div class="row mt-4">
     <div class="col-6">
         <div class="card text-white bg-dark">
             <div class="card-body">

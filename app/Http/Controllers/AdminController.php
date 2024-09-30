@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Room;
 
 class AdminController extends Controller
 {
@@ -22,7 +23,8 @@ class AdminController extends Controller
     // mostrar habitaciones
     public function rooms()
     {
-        return view('admin.rooms');
+        $rooms = Room::all();
+        return view('admin.rooms', compact('rooms'));
     }
 
     // procesa el login

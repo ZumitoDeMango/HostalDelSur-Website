@@ -1,9 +1,9 @@
 @extends('templates.master')
 
 @section('main-content')
-    <div class="row">
+    <div class="row mt-4">
         <h5 class="text-center">Su mejor alternativa en Talca</h5>
-        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+        <div id="carousel" class="carousel slide mt-4" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="{{ asset("images/comedor1.jpg") }}" class="d-block w-100" alt="">

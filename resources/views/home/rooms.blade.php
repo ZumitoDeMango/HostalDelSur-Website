@@ -1,12 +1,12 @@
 @extends('templates.master')
 
 @section('main-content')
-<div class="row">
+<div class="row mt-4">
     <!-- tabla -->
     <div class="col-12 order-last order-lg-first">
         <div class="row">
-            {{-- card habitacion --}}
-            <div class="col-12 col-md-6 col-xl-4 d-flex flex-column p-3 align-items-stretch">
+            {{-- cards habitacion --}}
+            <div class="col-12 col-md-6 col-xl-4 d-flex flex-column align-items-stretch">
                 <div class="card mb-3">
                     <div class="image-container-card">
                         <img src="{{ asset("images/hab1.jpeg") }}" class="img-fluid card-img-top" alt="...">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-xl-4 d-flex flex-column p-3 align-items-stretch">
+            <div class="col-12 col-md-6 col-xl-4 d-flex flex-column align-items-stretch">
                 <div class="card mb-3">
                     <div class="image-container-card">
                         <img src="{{ asset("images/hab2.jpeg") }}" class="img-fluid card-img-top" alt="...">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-xl-4 d-flex flex-column p-3 align-items-stretch">
+            <div class="col-12 col-md-6 col-xl-4 d-flex flex-column align-items-stretch">
                 <div class="card mb-3">
                     <div class="image-container-card">
                         <img src="{{ asset("images/hab3.jpeg") }}" class="img-fluid card-img-top" alt="...">

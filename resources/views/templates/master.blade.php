@@ -34,28 +34,28 @@
                     <div class="collapse navbar-collapse" id="collapsibleNavId">
                         <ul class="navbar-nav me-auto mt-2 mt-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{ route('home.index') }}" aria-current="page">INICIO
+                                <a class="nav-link @if(Route::current()->getName()=='home.index') active @endif" href="{{ route('home.index') }}" aria-current="page">INICIO
                                     <span class="visually-hidden">(current)</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home.about') }}">QUIENES SOMOS</a>
+                                <a class="nav-link @if(Route::current()->getName()=='home.about') active @endif" href="{{ route('home.about') }}">QUIENES SOMOS</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home.rooms') }}">HABITACIONES</a>
+                                <a class="nav-link @if(Route::current()->getName()=='home.rooms') active @endif" href="{{ route('home.rooms') }}">HABITACIONES</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home.location') }}">UBICACION</a>
+                                <a class="nav-link @if(Route::current()->getName()=='home.location') active @endif" href="{{ route('home.location') }}">UBICACION</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home.contact') }}">CONTACTO</a>
+                                <a class="nav-link @if(Route::current()->getName()=='home.contact') active @endif" href="{{ route('home.contact') }}">CONTACTO</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto">
                             <!-- Mostrar botón de logout si el usuario está autenticado -->
                             @if (Auth::check())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.dashboard') }}">DASHBOARD</a>
+                                    <a class="nav-link @if(Route::current()->getName()=='admin.dashboard') active @endif" href="{{ route('admin.dashboard') }}">DASHBOARD</a>
                                 </li>
                                 <li class="nav-item">
                                     <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">

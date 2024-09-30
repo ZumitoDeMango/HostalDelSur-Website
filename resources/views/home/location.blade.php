@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('main-content')
-<div class="row">
+<div class="row mt-4">
     <h1 class="text-center">Ubicación</h1>
     <div class="col-6">
         <p>Nos encontramos en</p>
