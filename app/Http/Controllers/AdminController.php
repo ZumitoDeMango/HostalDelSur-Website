@@ -21,10 +21,15 @@ class AdminController extends Controller
     }
 
     // mostrar habitaciones
-    public function rooms()
+    public function rooms(Request $request)
     {
-        $rooms = Room::all();
-        return view('admin.rooms', compact('rooms'));
+        if ($request->isMethod('get')) {
+            $rooms = Room::all();
+            return view('admin.rooms', compact('rooms'));
+        }
+        if ($request->isMethod('post')) {
+            
+        }
     }
 
     // procesa el login

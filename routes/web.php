@@ -18,7 +18,7 @@ Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout')
 
 // rutas dashboard admin
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
-Route::get('/dashboard-habitaciones', [AdminController::class, 'rooms'])->name('admin.rooms')->middleware('auth');
+Route::match(['get', 'post'], '/dashboard-habitaciones', [AdminController::class, 'rooms'])->name('admin.rooms')->middleware('auth');
 Route::get('/dashboard-reservas', [AdminController::class, 'booking'])->name('admin.booking')->middleware('auth');
 Route::get('/dashboard-administradores', [AdminController::class, 'admins'])->name('admin.admins')->middleware('auth');
 Route::get('/dashboard-pagos', [AdminController::class, 'payments'])->name('admin.payments')->middleware('auth');

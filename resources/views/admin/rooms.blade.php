@@ -5,7 +5,7 @@
 {{-- tabla de habitaciones --}}
 <div class="card text-white bg-dark mt-4">
     <div class="card-body">
-        <h4 class="card-title text-center">HABITACIONES</h4>
+        <h4 class="card-title text-center mb-3">HABITACIONES</h4>
         <table class="table">
             <thead>
                 <tr>
@@ -46,13 +46,13 @@
 {{-- modal para agregar habitacion --}}
 <div class="modal fade" id="agregarHabitacion" tabindex="-1" aria-labelledby="agregarLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="agregarLabel">Agregar habitacion</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
+        <div class="modal-content bg-dark text-white">
+            <form method="POST" action="{{ Route('admin.rooms') }}">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="agregarLabel">Agregar habitacion</h1>
+                    <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Nombre de la habitacion</label>
                         <input type="text" class="form-control">
@@ -87,11 +87,15 @@
                         <label class="form-label">Piso</label>
                         <input type="number" class="form-control">
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Agregar</button>
-            </div>
+                    <div class="mb-3">
+                        <label for="photosUpload" class="form-label">Fotos</label>
+                        <input class="form-control" type="file" id="photosUpload" multiple>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

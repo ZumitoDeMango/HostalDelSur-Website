@@ -4,7 +4,7 @@
 <div class="container vh-100 d-flex justify-content-center align-items-center">
     <div class="row">
         <div class="col-md-12">
-            <div class="card p-4">
+            <div class="card bg-dark p-4">
                 <div class="card-body">
                     <h3 class="card-title text-center text-white mb-4">Iniciar Sesión</h3>
                     <form method="POST" action="{{ route('admin.login.post') }}">
