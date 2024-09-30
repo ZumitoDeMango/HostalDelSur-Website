@@ -48,48 +48,56 @@
     <div class="modal-dialog">
         <div class="modal-content bg-dark text-white">
             <form method="POST" action="{{ Route('admin.rooms') }}">
+            @csrf
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="agregarLabel">Agregar habitacion</h1>
                     <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Nombre de la habitacion</label>
-                        <input type="text" class="form-control">
+                        <label for="nombre" class="form-label">Nombre de la habitacion</label>
+                        <input id="nombre" name="nombre" type="text" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Tipo</label>
-                        <select class="form-select"></select>
+                        <label for="tipo" class="form-label">Tipo</label>
+                        <select id="tipo" name="tipo" class="form-select">
+                            <option selected>--SELECCIONE UN TIPO--</option>
+                            <option value="Single">Single</option>
+                            <option value="Twin">Twin</option>
+                            <option value="Doble">Doble</option>
+                            <option value="Triple">Triple</option>
+                            <option value="Cuatruple">Cuatruple</option>
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Precio</label>
-                        <input type="number" class="form-control">
+                        <label for="precio" class="form-label">Precio</label>
+                        <input id="precio" name="precio" type="number" class="form-control">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 d-flex justify-content-between">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox">
-                            <label class="form-check-label">Baño privado</label>
+                            <input id="banopriv" name="banopriv" class="form-check-input" type="checkbox">
+                            <label for="banopriv" class="form-check-label">Baño privado</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox">
-                            <label class="form-check-label">Television</label>
+                            <input id="television" name="television" class="form-check-input" type="checkbox">
+                            <label for="television" class="form-check-label">Television</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox">
-                            <label class="form-check-label">Aire acondicionado</label>
+                            <input id="aireac" name="aireac" class="form-check-input" type="checkbox">
+                            <label for="aireac" class="form-check-label">Aire acondicionado</label>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Descripcion</label>
-                        <textarea class="form-control"></textarea>
+                        <label for="descripcion" class="form-label">Descripcion</label>
+                        <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Piso</label>
-                        <input type="number" class="form-control">
+                        <label for="piso" class="form-label">Piso</label>
+                        <input id="piso" name="piso" type="number" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="photosUpload" class="form-label">Fotos</label>
-                        <input class="form-control" type="file" id="photosUpload" multiple>
+                        <label for="fotos" class="form-label">Fotos</label>
+                        <input id="fotos" class="form-control" type="file" multiple>
                     </div>
                 </div>
                 <div class="modal-footer">

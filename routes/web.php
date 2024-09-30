@@ -12,13 +12,12 @@ Route::match(['get'], '/ubicacion', [HomeController::class, 'location'])->name('
 Route::match(['get'], '/contacto', [HomeController::class, 'contact'])->name('home.contact');
 
 // rutas login admin
-Route::get('/login', [AdminController::class, 'showLogin'])->name('admin.login');
-Route::post('/login', [AdminController::class, 'login'])->name('admin.login.post');
-Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('admin.login');
+Route::match(['post'], '/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
 // rutas dashboard admin
-Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
+Route::match(['get'], '/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
 Route::match(['get', 'post'], '/dashboard-habitaciones', [AdminController::class, 'rooms'])->name('admin.rooms')->middleware('auth');
-Route::get('/dashboard-reservas', [AdminController::class, 'booking'])->name('admin.booking')->middleware('auth');
-Route::get('/dashboard-administradores', [AdminController::class, 'admins'])->name('admin.admins')->middleware('auth');
-Route::get('/dashboard-pagos', [AdminController::class, 'payments'])->name('admin.payments')->middleware('auth');
+Route::match(['get'], '/dashboard-reservas', [AdminController::class, 'booking'])->name('admin.booking')->middleware('auth');
+Route::match(['get'], '/dashboard-administradores', [AdminController::class, 'admins'])->name('admin.admins')->middleware('auth');
+Route::match(['get'], '/dashboard-pagos', [AdminController::class, 'payments'])->name('admin.payments')->middleware('auth');
