@@ -26,25 +26,25 @@
                     <td>{{ $room->piso }}</td>
                     <td>{{ $room->disponible }}</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-warning pb-0 text-white" data-bs-toggle="tooltip" data-bs-title="Editar">
+                        <button class="btn btn-sm btn-warning pb-0 text-white" data-bs-toggle="tooltip" data-bs-title="Editar">
                             <span class="material-icons" style="font-size: 20px;">edit</span>
-                        </a>
-                        <a href="#" class="btn btn-sm btn-danger pb-0 text-white" data-bs-toggle="tooltip" data-bs-title="Eliminar">
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-danger pb-0 text-white" data-bs-toggle="tooltip" data-bs-title="Eliminar">
                             <span class="material-icons" style="font-size: 20px;">delete</span>
-                        </a>
+                        </button>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
         <div class="d-grid">
-            <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#agregarHabitacion">Agregar habitacion</button>
+            <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#addRoom">Agregar habitacion</button>
         </div>
     </div>
 </div>
 
 {{-- modal para agregar habitacion --}}
-<div class="modal fade" id="agregarHabitacion" tabindex="-1" aria-labelledby="agregarLabel" aria-hidden="true">
+<div class="modal fade" id="addRoom" tabindex="-1" aria-labelledby="agregarLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content bg-dark text-white">
             <form method="POST" action="{{ Route('admin.rooms') }}">

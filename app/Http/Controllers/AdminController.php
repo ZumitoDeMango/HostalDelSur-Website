@@ -14,7 +14,7 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    // mostrar habitaciones
+    // funciones de habitaciones
     public function rooms(Request $request)
     {
         if ($request->isMethod('get')) {
@@ -37,9 +37,13 @@ class AdminController extends Controller
             $room->save();
             return redirect()->route('admin.rooms');
         }
-        if ($request->isMethod('delete')) {
-            
-        }
+    }
+    public function destroyRoom($id)
+    {
+        $room = Room::findOrFail($id);
+        $room->delete();
+
+        return redirect()->route('admin.rooms');
     }
 
     // login
