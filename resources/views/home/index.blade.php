@@ -2,6 +2,7 @@
 
 @section('main-content')
     <div class="row">
+        <h5 class="text-center">Su mejor alternativa en Talca</h5>
         <div id="carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">

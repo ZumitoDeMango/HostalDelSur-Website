@@ -35,7 +35,7 @@
         </table>
         <div class="d-grid">
             <a class="btn btn-primary" href="#" 
-            role="button">Agegar habitacion</a>
+            role="button">Agregar habitacion</a>
         </div>
     </div>
 </div>
