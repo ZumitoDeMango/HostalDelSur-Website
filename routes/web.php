@@ -32,7 +32,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::patch('/habitaciones/{id}', [RoomsController::class, 'update'])->name('rooms.update');
 
     // Rutas para reservas, administradores y pagos
-    Route::get('/reservas', [AdminController::class, 'booking'])->name('admin.booking');
+    Route::get('/reservas', [AdminController::class, 'reservations'])->name('reservations.admin');
     Route::get('/administradores', [AdminController::class, 'admins'])->name('admin.admins');
     Route::get('/pagos', [AdminController::class, 'payments'])->name('admin.payments');
 });

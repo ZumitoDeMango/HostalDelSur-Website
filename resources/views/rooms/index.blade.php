@@ -18,8 +18,8 @@
 <div class="row mt-4">
     <div class="col-12 order-last order-lg-first">
         <div class="row">
-            {{-- cards de las habitaciones --}}
             @foreach($rooms as $room) 
+            {{-- card de la habitacion --}}
             <div class="col-12 col-md-6 col-xl-4 d-flex flex-column align-items-stretch">
                 <div class="card mb-3">
                     <div class="image-container-card">
@@ -29,9 +29,37 @@
                         <h5 class="card-title text-center mb-3">{{ $room->nombre }} - {{ $room->tipo }}</h5>
                         <h6 class="text-center mb-3">Desde ${{ $room->precio }}</h6>
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary">
-                                Ver detalles
-                            </button>
+                            <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#modalRoom{{ $room->id }}">Ver detalles</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- modal de la habitacion --}}
+            <div class="modal fade" id="modalRoom{{ $room->id }}" tabindex="-1" aria-labelledby="mostrarLabel{{ $room->id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-dark text-white">
+                            <h1 class="modal-title fs-5" id="mostrarLabel">{{ $room->nombre }} - {{ $room->tipo }}</h1>
+                            <button type="close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="image-container-card mb-3">
+                                <img src="{{ asset("images/hab1.jpeg") }}" class="img-fluid card-img-top" alt="...">
+                            </div>
+                            <div class="row">
+                                <p>{{ $room->descripcion }}</p>
+                                <p>Se encuentra en el piso {{ $room->piso }}</p>
+                            </div>
+                            <div class="row">
+                                <p>¿Baño privado? {{ $room->banopriv == '1' ? 'Si tiene' : 'No tiene' }}</p>
+                                <p>¿Television? {{ $room->television == '1' ? 'Si tiene' : 'No tiene' }}</p>
+                                <p>¿Aire acondicionado? {{ $room->aireac == '1' ? 'Si tiene' : 'No tiene' }}</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer bg-dark text-white">
+                            <div class="d-grid">
+                                <a class="btn btn-primary">Reservar</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -40,5 +68,6 @@
         </div>
     </div>
 </div>
+
 
 @endsection

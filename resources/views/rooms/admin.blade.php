@@ -18,7 +18,6 @@
                     <th>Habitacion</th>
                     <th>Tipo</th>
                     <th>Precio</th>
-                    <th>Piso</th>
                     <th>Disponible</th>
                     <th colspan="2">Acciones</th>
                 </tr>
@@ -28,9 +27,10 @@
                 <tr>
                     <td>{{ $room->nombre }}</td>
                     <td>{{ $room->tipo }}</td>
-                    <td>{{ $room->precio }}</td>
-                    <td>{{ $room->piso }}</td>
-                    <td>{{ $room->disponible }}</td>
+                    <td>${{ $room->precio }}</td>
+                    <td>
+                        <span class="material-icons" style="font-size: 20px;">{{ $room->disponible == '1' ? 'check' : 'close'}}</span>
+                    </td>
                     <td>
                         <div class="d-grid">
                             <a href="{{ route('rooms.edit',$room->id) }}" class="btn btn-sm btn-warning pb-0 text-white" data-bs-title="Editar">

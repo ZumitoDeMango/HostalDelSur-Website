@@ -43,7 +43,7 @@
                     role="button">HABITACIONES</a>
                 </div>
                 <div class="d-grid mb-3">
-                    <a class="btn btn-primary" href="{{ route('admin.booking') }}" 
+                    <a class="btn btn-primary" href="{{ route('reservations.admin') }}" 
                     role="button">RESERVAS</a>
                 </div>
                 <div class="d-grid mb-3">

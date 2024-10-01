@@ -10,10 +10,7 @@ class RoomsController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtener el valor del filtro de tipo desde la solicitud
         $tipo = $request->get('tipo');
-
-        // Si hay un tipo seleccionado, filtrar por tipo. Si no, mostrar todas las habitaciones.
         $rooms = Room::when($tipo, function ($query, $tipo) {
             return $query->where('tipo', $tipo);
         })->get();
