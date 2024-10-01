@@ -28,6 +28,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::get('/habitaciones', [RoomsController::class, 'admin'])->name('rooms.admin');
     Route::post('/habitaciones', [RoomsController::class, 'store'])->name('rooms.store');
     Route::delete('/habitaciones/{id}', [RoomsController::class, 'destroy'])->name('rooms.destroy');
+    Route::get('habitaciones/{id}/edit', [RoomsController::class, 'edit'])->name('rooms.edit');
 
     // Rutas para reservas, administradores y pagos
     Route::get('/reservas', [AdminController::class, 'booking'])->name('admin.booking');

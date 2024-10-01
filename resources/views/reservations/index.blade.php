@@ -2,5 +2,3 @@
 
 @section('main-content')
 @endsection
-
-<hr> {{-- linea divisora --}}

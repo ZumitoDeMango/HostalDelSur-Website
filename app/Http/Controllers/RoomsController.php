@@ -8,9 +8,18 @@ use App\Models\Room;
 
 class RoomsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('rooms.index');
+        // Obtener el valor del filtro de tipo desde la solicitud
+        $tipo = $request->get('tipo');
+
+        // Si hay un tipo seleccionado, filtrar por tipo. Si no, mostrar todas las habitaciones.
+        $rooms = Room::when($tipo, function ($query, $tipo) {
+            return $query->where('tipo', $tipo);
+        })->get();
+
+        /* $rooms = Room::all(); */
+        return view('rooms.index', compact('rooms'));
     }
     public function admin() 
     {
@@ -37,5 +46,10 @@ class RoomsController extends Controller
         $room = Room::findOrFail($id);
         $room->delete();
         return redirect()->route('rooms.admin');
+    }
+    public function edit($id)
+    {
+        $room = Room::findOrFail($id);
+        return view('rooms.edit', compact('room'));
     }
 }

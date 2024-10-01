@@ -5,7 +5,13 @@
 {{-- tabla de habitaciones --}}
 <div class="card text-white bg-dark mt-4">
     <div class="card-body">
-        <h4 class="card-title text-center mb-3">HABITACIONES</h4>
+        <h3 class="card-title text-center mb-3">HABITACIONES</h3>
+        <div class="row mb-3">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Buscar habitacion" aria-label="Search">
+                <button class="btn btn-success" type="submit">Buscar</button>
+            </form>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -18,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($rooms as $room)    
+                @foreach($rooms as $room)
                 <tr>
                     <td>{{ $room->nombre }}</td>
                     <td>{{ $room->tipo }}</td>
@@ -27,9 +33,9 @@
                     <td>{{ $room->disponible }}</td>
                     <td>
                         <div class="d-grid">
-                            <button type="button" class="btn btn-sm btn-warning pb-0 text-white" data-bs-title="Editar">
+                            <a href="{{ route('rooms.edit',$room->id) }}" class="btn btn-sm btn-warning pb-0 text-white" data-bs-title="Editar">
                                 <span class="material-icons" style="font-size: 20px;">edit</span>
-                            </button>
+                            </a>
                         </div>
                     </td>
                     <td>
