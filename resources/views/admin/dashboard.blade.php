@@ -39,7 +39,7 @@
             <div class="card-body">
                 <h4 class="card-title mb-3 text-center">GESTIÓN</h4>
                 <div class="d-grid mb-3">
-                    <a class="btn btn-primary" href="{{ route('admin.rooms') }}" 
+                    <a class="btn btn-primary" href="{{ route('rooms.admin') }}" 
                     role="button">HABITACIONES</a>
                 </div>
                 <div class="d-grid mb-3">

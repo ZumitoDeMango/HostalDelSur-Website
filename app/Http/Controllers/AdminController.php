@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Room;
 
 class AdminController extends Controller
 {
@@ -13,40 +12,8 @@ class AdminController extends Controller
     {
         return view('admin.dashboard');
     }
-
-    // funciones de habitaciones
-    public function rooms(Request $request)
-    {
-        if ($request->isMethod('get')) {
-            // muestra habitaciones
-            $rooms = Room::all();
-            return view('admin.rooms', compact('rooms'));
-        }
-        if ($request->isMethod('post')) {
-            // guarda la habitacion
-            $room = new Room();
-            $room->nombre = $request->nombre;
-            $room->tipo = $request->tipo;
-            $room->precio = $request->precio;
-            $room->banopriv = $request->has('banopriv') ? 1 : 0;
-            $room->television = $request->has('television') ? 1 : 0;
-            $room->aireac = $request->has('aireac') ? 1 : 0;
-            $room->descripcion = $request->descripcion;
-            $room->piso = $request->piso;
-            $room->disponible = 1;
-            $room->save();
-            return redirect()->route('admin.rooms');
-        }
-    }
-    public function destroyRoom($id)
-    {
-        $room = Room::findOrFail($id);
-        $room->delete();
-
-        return redirect()->route('admin.rooms');
-    }
-
-    // login
+    
+    // login y logout
     public function login(Request $request)
     {
         if ($request->isMethod('get')) {
@@ -72,8 +39,6 @@ class AdminController extends Controller
             ]);
         }
     }
-
-    // logout
     public function logout()
     {
         Auth::logout();

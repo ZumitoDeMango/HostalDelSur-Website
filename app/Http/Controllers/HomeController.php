@@ -13,9 +13,6 @@ class HomeController extends Controller
     public function about(){
         return view('home.about');
     }
-    public function rooms(){
-        return view('home.rooms');
-    }
     public function location(){
         return view('home.location');
     }

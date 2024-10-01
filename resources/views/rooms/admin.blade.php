@@ -26,28 +26,38 @@
                     <td>{{ $room->piso }}</td>
                     <td>{{ $room->disponible }}</td>
                     <td>
-                        <button class="btn btn-sm btn-warning pb-0 text-white" data-bs-toggle="tooltip" data-bs-title="Editar">
-                            <span class="material-icons" style="font-size: 20px;">edit</span>
-                        </button>
-                        <button type="submit" class="btn btn-sm btn-danger pb-0 text-white" data-bs-toggle="tooltip" data-bs-title="Eliminar">
-                            <span class="material-icons" style="font-size: 20px;">delete</span>
-                        </button>
+                        <div class="d-grid">
+                            <button type="button" class="btn btn-sm btn-warning pb-0 text-white" data-bs-title="Editar">
+                                <span class="material-icons" style="font-size: 20px;">edit</span>
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ route('rooms.destroy',$room->id) }}">
+                        @csrf
+                        @method("delete")
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-sm btn-danger pb-0 text-white" data-bs-toggle="tooltip" data-bs-title="Eliminar">
+                                    <span class="material-icons" style="font-size: 20px;">delete</span>
+                                </button>
+                            </div>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
         <div class="d-grid">
-            <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#addRoom">Agregar habitacion</button>
+            <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#modalRoom">Agregar habitacion</button>
         </div>
     </div>
 </div>
 
 {{-- modal para agregar habitacion --}}
-<div class="modal fade" id="addRoom" tabindex="-1" aria-labelledby="agregarLabel" aria-hidden="true">
+<div class="modal fade" id="modalRoom" tabindex="-1" aria-labelledby="agregarLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content bg-dark text-white">
-            <form method="POST" action="{{ Route('admin.rooms') }}">
+            <form method="POST" action="{{ route('rooms.store') }}">
             @csrf
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="agregarLabel">Agregar habitacion</h1>
