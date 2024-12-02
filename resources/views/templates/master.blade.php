@@ -42,7 +42,7 @@
                                 <a class="nav-link @if(Route::current()->getName()=='home.about') active @endif" href="{{ route('home.about') }}">QUIENES SOMOS</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @if(Route::current()->getName()=='home.rooms') active @endif" href="{{ route('home.rooms') }}">HABITACIONES</a>
+                                <a class="nav-link @if(Route::current()->getName()=='rooms.index') active @endif" href="{{ route('rooms.index') }}">HABITACIONES</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link @if(Route::current()->getName()=='home.location') active @endif" href="{{ route('home.location') }}">UBICACION</a>

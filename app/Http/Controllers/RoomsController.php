@@ -5,18 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
+use App\Models\Type;
 
 class RoomsController extends Controller
 {
     public function index(Request $request)
     {
-        $tipo = $request->get('tipo');
-        $rooms = Room::when($tipo, function ($query, $tipo) {
-            return $query->where('tipo', $tipo);
-        })->get();
+        $rooms = Room::with('type')->get();
+        $types = Type::all();
+        $tipoSelec = $request->input('tipo');
 
-        /* $rooms = Room::all(); */
-        return view('rooms.index', compact('rooms'));
+        $rooms = Room::with('type')
+        ->when($tipoSelec, function ($query) use ($tipoSelec) {
+            $query->whereHas('type', function ($query) use ($tipoSelec) {
+                $query->where('nombre', $tipoSelec);
+            });
+        })
+        ->get();
+        
+        return view('rooms.index', compact('rooms', 'types', 'tipoSelec'));
     }
     public function admin() 
     {

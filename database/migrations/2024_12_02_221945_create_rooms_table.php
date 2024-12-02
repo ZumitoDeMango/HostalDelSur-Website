@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('tipo');
+            $table->unsignedBigInteger('tipo');
             $table->integer('precio');
             $table->boolean('banopriv');
             $table->boolean('television');
@@ -23,6 +23,8 @@ return new class extends Migration
             $table->integer('piso');
             $table->boolean('disponible');
             $table->string('urlfoto');
+
+            $table->foreign('tipo')->references('id')->on('types')->onDelete('cascade');
         });
     }
 

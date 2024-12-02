@@ -3,18 +3,20 @@
 @section('main-content')
 <div class="row mt-4 d-flex justify-content-end">
     <div class="col-3">
-        <form method="GET" action="{{ route('home.rooms') }}" class="mb-3">
+        <form method="POST" action="{{ route('rooms.index') }}" class="mb-3">
+            @csrf
             <select id="tipo" name="tipo" class="form-select" onchange="this.form.submit()">
                 <option value="">Todos los tipos</option>
-                <option value="Single" {{ request('tipo') == 'Single' ? 'selected' : '' }}>Single</option>
-                <option value="Twin" {{ request('tipo') == 'Twin' ? 'selected' : '' }}>Twin</option>
-                <option value="Doble" {{ request('tipo') == 'Doble' ? 'selected' : '' }}>Doble</option>
-                <option value="Triple" {{ request('tipo') == 'Triple' ? 'selected' : '' }}>Triple</option>
-                <option value="Cuatruple" {{ request('tipo') == 'Cuatruple' ? 'selected' : '' }}>Cuatruple</option>
+                @foreach($types as $type)
+                    <option value="{{ $type->nombre }}" {{ (isset($tipoSelec) && $tipoSelec == $type->nombre) ? 'selected' : '' }}>
+                        {{ $type->nombre }}
+                    </option>
+                @endforeach
             </select>
         </form>
     </div>
 </div>
+
 <div class="row mt-4">
     <div class="col-12 order-last order-lg-first">
         <div class="row">
@@ -26,7 +28,7 @@
                         <img src="{{ asset("images/hab1.jpeg") }}" class="img-fluid card-img-top" alt="...">
                     </div>
                     <div class="card-body d-flex flex-column justify-content-between">
-                        <h5 class="card-title text-center mb-3">{{ $room->nombre }} - {{ $room->tipo }}</h5>
+                        <h5 class="card-title text-center mb-3">{{ $room->nombre }} - {{ $room->type->nombre }}</h5>
                         <h6 class="text-center mb-3">Desde ${{ $room->precio }}</h6>
                         <div class="d-grid gap-2">
                             <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#modalRoom{{ $room->id }}">Ver detalles</button>
@@ -39,7 +41,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header bg-dark text-white">
-                            <h1 class="modal-title fs-5" id="mostrarLabel">{{ $room->nombre }} - {{ $room->tipo }}</h1>
+                            <h1 class="modal-title fs-5" id="mostrarLabel">{{ $room->nombre }} - {{ $room->type->nombre }}</h1>
                             <button type="close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

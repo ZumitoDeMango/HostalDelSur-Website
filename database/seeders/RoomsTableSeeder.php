@@ -13,27 +13,44 @@ class RoomsTableSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('types')->insert([
+            'nombre' => 'Single'
+        ]);
+        DB::table('types')->insert([
+            'nombre' => 'Twin'
+        ]);
+        DB::table('types')->insert([
+            'nombre' => 'Doble'
+        ]);
+        DB::table('types')->insert([
+            'nombre' => 'Triple'
+        ]);
+        DB::table('types')->insert([
+            'nombre' => 'Cuadruple'
+        ]);
         DB::table('rooms')->insert([
             'nombre' => 'Habitacion 1',
-            'tipo' => 'Matrimonial',
+            'tipo' => 3,
             'precio' => 40000,
             'banopriv' => True,
             'television' => True,
             'aireac' => True,
             'descripcion' => 'Acogedora habitacion',
             'piso' => 1,
-            'disponible' => True
+            'disponible' => True,
+            'urlfoto' => 'I II II I_'
         ]);
         DB::table('rooms')->insert([
             'nombre' => 'Habitacion 2',
-            'tipo' => 'Single',
+            'tipo' => 1,
             'precio' => 20000,
             'banopriv' => true,
             'television' => true,
             'aireac' => true,
             'descripcion' => 'Hermosa habitacion',
             'piso' => 2,
-            'disponible' => false
+            'disponible' => false,
+            'urlfoto' => 'I II II I_'
         ]);
     }
 }

@@ -26,7 +26,7 @@
                 @foreach($rooms as $room)
                 <tr>
                     <td>{{ $room->nombre }}</td>
-                    <td>{{ $room->tipo }}</td>
+                    <td>{{ $room->type->nombre }}</td>
                     <td>${{ $room->precio }}</td>
                     <td>
                         <span class="material-icons" style="font-size: 20px;">{{ $room->disponible == '1' ? 'check' : 'close'}}</span>

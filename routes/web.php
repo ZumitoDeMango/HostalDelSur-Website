@@ -9,7 +9,8 @@ use App\Http\Controllers\RoomsController;
 Route::prefix('/')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
     Route::get('/sobre-nosotros', [HomeController::class, 'about'])->name('home.about');
-    Route::get('/habitaciones', [RoomsController::class, 'index'])->name('home.rooms');
+    Route::get('/habitaciones', [RoomsController::class, 'index'])->name('rooms.index');
+    Route::post('/habitaciones', [RoomsController::class, 'index'])->name('rooms.index');
     Route::get('/ubicacion', [HomeController::class, 'location'])->name('home.location');
     Route::get('/contacto', [HomeController::class, 'contact'])->name('home.contact');
 });
