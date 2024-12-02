@@ -16,7 +16,8 @@ Route::prefix('/')->group(function () {
 
 // Rutas Login Admin
 Route::prefix('')->group(function () {
-    Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('admin.login');
+    Route::get('/login', [AdminController::class, 'showLogin'])->name('admin.login');
+    Route::post('/login', [AdminController::class, 'login'])->name('admin.login.submit');
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 });
 

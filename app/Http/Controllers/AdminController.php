@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\LoginRequest;
 
 class AdminController extends Controller
 {
@@ -14,31 +15,25 @@ class AdminController extends Controller
     }
     
     // login y logout
-    public function login(Request $request)
+    public function showLogin()
     {
-        if ($request->isMethod('get')) {
-            // muestra login
-            return view('admin.login');
-        }
-        if ($request->isMethod('post')) {
-            // validar datos
-            $request->validate([
-                'email' => 'required|email',
-                'password' => 'required|min:8',
-            ]);
-    
-            // inicia sesion
-            if (Auth::attempt($request->only('email', 'password'))) {
-                // redirige al dashboard luego del login
-                return redirect()->route('admin.dashboard');
-            }
-    
-            // Si falla, redirigir de nuevo al login con un mensaje de error
-            return back()->withErrors([
-                'email' => 'Las credenciales no coinciden con nuestros registros.',
-            ]);
-        }
+        return view('admin.login');
     }
+
+    public function login(LoginRequest $request)
+    {
+        // Intentar autenticar con el email y password proporcionados
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate(); // Prevenir ataques de fijación de sesión
+            return redirect()->route('admin.dashboard')->with('success', 'Sesión iniciada correctamente.');
+        }
+
+        // Si la autenticación falla, redirigir con mensaje de error
+        return back()->withErrors([
+            'email' => 'Credenciales incorrectas. Por favor, inténtalo de nuevo.',
+        ])->withInput($request->except('password')); // Retener todos los datos excepto la contraseña
+    }
+
     public function logout()
     {
         Auth::logout();

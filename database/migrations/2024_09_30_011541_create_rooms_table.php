@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('descripcion');
             $table->integer('piso');
             $table->boolean('disponible');
+            $table->string('urlfoto');
         });
     }
 
