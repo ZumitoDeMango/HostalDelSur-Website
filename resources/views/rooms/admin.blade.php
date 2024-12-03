@@ -7,8 +7,14 @@
     <div class="card-body">
         <h3 class="card-title text-center mb-3">HABITACIONES</h3>
         <div class="row mb-3">
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscar habitacion" aria-label="Search">
+            <form class="d-flex" role="search" method="GET" action="{{ route('rooms.admin') }}">
+                <input 
+                    class="form-control me-2" 
+                    type="search" 
+                    name="search" 
+                    placeholder="Buscar habitación" 
+                    aria-label="Search" 
+                    value="{{ $search ?? '' }}"> <!-- Preserva el valor ingresado -->
                 <button class="btn btn-success" type="submit">Buscar</button>
             </form>
         </div>
@@ -39,14 +45,13 @@
                         </div>
                     </td>
                     <td>
-                        <form method="POST" action="{{ route('rooms.destroy',$room->id) }}">
-                        @csrf
-                        @method("delete")
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-sm btn-danger pb-0 text-white" data-bs-toggle="tooltip" data-bs-title="Eliminar">
-                                    <span class="material-icons" style="font-size: 20px;">delete</span>
-                                </button>
-                            </div>
+                        <form method="POST" action="{{ route('rooms.destroy', $room->id) }}" id="deleteForm{{ $room->id }}">
+                            @csrf
+                            @method("delete")
+                            <button type="button" class="btn btn-sm btn-danger pb-0 text-white" data-bs-toggle="modal" data-bs-target="#modalDelete" 
+                                data-bs-room-id="{{ $room->id }}" data-bs-action="{{ route('rooms.destroy', $room->id) }}">
+                                <span class="material-icons" style="font-size: 20px;">delete</span>
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -55,6 +60,29 @@
         </table>
         <div class="d-grid">
             <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#modalRoom">Agregar habitacion</button>
+        </div>
+    </div>
+</div>
+
+{{-- modal para confirmacion de delete --}}
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar esta habitación? Esta acción no se puede deshacer.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form id="deleteForm" method="POST" action="" style="display: inline;">
+                    @csrf
+                    @method("delete")
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -73,21 +101,28 @@
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre de la habitacion</label>
                         <input id="nombre" name="nombre" type="text" class="form-control">
+                        @error('nombre')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="tipo" class="form-label">Tipo</label>
                         <select id="tipo" name="tipo" class="form-select">
                             <option selected>--SELECCIONE UN TIPO--</option>
-                            <option value="Single">Single</option>
-                            <option value="Twin">Twin</option>
-                            <option value="Doble">Doble</option>
-                            <option value="Triple">Triple</option>
-                            <option value="Cuatruple">Cuatruple</option>
+                            @foreach($types as $type)
+                                <option value="{{ $type->id }}">{{ $type->nombre }}</option>
+                            @endforeach
                         </select>
+                        @error('tipo')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="precio" class="form-label">Precio</label>
                         <input id="precio" name="precio" type="number" class="form-control">
+                        @error('precio')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-3 d-flex justify-content-between">
                         <div class="form-check">
@@ -106,14 +141,23 @@
                     <div class="mb-3">
                         <label for="descripcion" class="form-label">Descripcion</label>
                         <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
+                        @error('descripcion')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="piso" class="form-label">Piso</label>
                         <input id="piso" name="piso" type="number" class="form-control">
+                        @error('piso')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="fotos" class="form-label">Fotos</label>
-                        <input id="fotos" class="form-control" type="file" multiple>
+                        <label for="foto" class="form-label">Foto</label>
+                        <input id="foto" class="form-control" type="file">
+                        @error('foto')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -123,5 +167,28 @@
         </div>
     </div>
 </div>
+
+@if ($errors->any())
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = new bootstrap.Modal(document.getElementById('modalRoom'));
+            modal.show();
+        });
+    </script>
+@endif
+
+<script>
+    // Cuando se abre el modal, actualizar la acción del formulario de eliminación
+    var deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // Botón que activó el modal
+        var roomId = button.getAttribute('data-bs-room-id'); // ID de la habitación
+        var action = button.getAttribute('data-bs-action'); // URL de eliminación
+
+        // Actualizar la acción del formulario con la URL correcta
+        var deleteForm = document.getElementById('deleteForm');
+        deleteForm.action = action;
+    });
+</script>
 
 @endsection

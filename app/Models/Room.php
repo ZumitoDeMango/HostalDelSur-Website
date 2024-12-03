@@ -10,6 +10,19 @@ class Room extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'nombre',
+        'tipo',
+        'precio',
+        'banopriv',
+        'television',
+        'aireac',
+        'descripcion',
+        'piso',
+        'disponible',
+        'urlfoto',
+    ];    
+
     protected $table = 'rooms';
     protected $dates = ['deleted_at'];
     public $timestamps = false;

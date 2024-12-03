@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
 use App\Models\Type;
+use App\Http\Requests\CreateRoomRequest;
 
 class RoomsController extends Controller
 {
@@ -25,26 +26,48 @@ class RoomsController extends Controller
         
         return view('rooms.index', compact('rooms', 'types', 'tipoSelec'));
     }
-    public function admin() 
+    public function admin(Request $request) 
     {
         $rooms = Room::all();
-        return view('rooms.admin', compact('rooms'));
+        $types = Type::all();
+
+        // Obtener el término de búsqueda desde la solicitud
+        $search = $request->input('search');
+
+        // Obtener habitaciones filtradas o todas si no hay búsqueda
+        $rooms = Room::with('type')
+            ->when($search, function ($query, $search) {
+                $query->where('nombre', 'LIKE', '%' . $search . '%');
+            })
+            ->get();
+
+        return view('rooms.admin', compact('rooms', 'types'));
     }
-    public function store(Request $request) 
+    public function store(CreateRoomRequest $request)
     {
-        $room = new Room();
-        $room->nombre = $request->nombre;
-        $room->tipo = $request->tipo;
-        $room->precio = $request->precio;
-        $room->banopriv = $request->has('banopriv') ? 1 : 0;
-        $room->television = $request->has('television') ? 1 : 0;
-        $room->aireac = $request->has('aireac') ? 1 : 0;
-        $room->descripcion = $request->descripcion;
-        $room->piso = $request->piso;
-        $room->disponible = 1;
-        $room->save();
-        return redirect()->route('rooms.admin');
+        // Procesar los datos validados
+        $data = $request->validated();
+
+        // Subir la imagen si existe y guardar su ruta
+        if ($request->hasFile('foto')) {
+            $data['urlfoto'] = $request->file('foto')->store('public/images');
+        } else {
+            $data['urlfoto'] = 'default.jpg'; // Imagen por defecto si no se sube ninguna
+        }
+
+        // Asignar valores adicionales
+        $data['banopriv'] = $request->has('banopriv') ? 1 : 0;
+        $data['television'] = $request->has('television') ? 1 : 0;
+        $data['aireac'] = $request->has('aireac') ? 1 : 0;
+        $data['disponible'] = 1;
+
+        // Crear la habitación
+        Room::create($data);
+
+        // Redireccionar con mensaje de éxito
+        return redirect()->route('rooms.admin')->with('success', 'Habitación agregada exitosamente.');
     }
+
     public function destroy($id) 
     {
         $room = Room::findOrFail($id);
@@ -53,6 +76,7 @@ class RoomsController extends Controller
     }
     public function edit($id)
     {
+        $types = Type::all();
         $room = Room::findOrFail($id);
         return view('rooms.edit', compact('room'));
     }
@@ -68,6 +92,7 @@ class RoomsController extends Controller
         $room->descripcion = $request->descripcion;
         $room->piso = $request->piso;
         $room->disponible = 1;
+        $room->urlfoto = 'foto.jpg';
         $room->save();
         return redirect()->route('rooms.admin');
     }
