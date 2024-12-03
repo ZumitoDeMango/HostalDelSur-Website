@@ -65,7 +65,7 @@ class RoomsController extends Controller
         Room::create($data);
 
         // Redireccionar con mensaje de éxito
-        return redirect()->route('rooms.admin')->with('success', 'Habitación agregada exitosamente.');
+        return redirect()->route('rooms.admin');
     }
 
     public function destroy($id) 

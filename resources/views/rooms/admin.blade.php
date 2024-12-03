@@ -77,7 +77,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <form id="deleteForm" method="POST" action="" style="display: inline;">
+                <form id="deleteForm" method="POST" action="{{ route('rooms.destroy', $room->id) }}" style="display: inline;">
                     @csrf
                     @method("delete")
                     <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -178,14 +178,12 @@
 @endif
 
 <script>
-    // Cuando se abre el modal, actualizar la acción del formulario de eliminación
     var deleteModal = document.getElementById('deleteModal');
     deleteModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget; // Botón que activó el modal
-        var roomId = button.getAttribute('data-bs-room-id'); // ID de la habitación
-        var action = button.getAttribute('data-bs-action'); // URL de eliminación
+        var button = event.relatedTarget;
+        var roomId = button.getAttribute('data-bs-room-id');
+        var action = button.getAttribute('data-bs-action');
 
-        // Actualizar la acción del formulario con la URL correcta
         var deleteForm = document.getElementById('deleteForm');
         deleteForm.action = action;
     });
