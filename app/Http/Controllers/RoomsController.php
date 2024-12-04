@@ -12,20 +12,22 @@ class RoomsController extends Controller
 {
     public function index(Request $request)
     {
-        $rooms = Room::with('type')->get();
         $types = Type::all();
+
         $tipoSelec = $request->input('tipo');
 
         $rooms = Room::with('type')
-        ->when($tipoSelec, function ($query) use ($tipoSelec) {
-            $query->whereHas('type', function ($query) use ($tipoSelec) {
-                $query->where('nombre', $tipoSelec);
-            });
-        })
-        ->get();
-        
+            ->where('disponible', true)
+            ->when($tipoSelec, function ($query) use ($tipoSelec) {
+                $query->whereHas('type', function ($query) use ($tipoSelec) {
+                    $query->where('nombre', $tipoSelec);
+                });
+            })
+            ->get();
+
         return view('rooms.index', compact('rooms', 'types', 'tipoSelec'));
     }
+
     public function admin(Request $request) 
     {
         $rooms = Room::all();
@@ -43,26 +45,27 @@ class RoomsController extends Controller
 
         return view('rooms.admin', compact('rooms', 'types'));
     }
+
     public function store(CreateRoomRequest $request)
     {
         // Procesar los datos validados
-        $data = $request->validated();
+        $room = $request->validated();
 
         // Subir la imagen si existe y guardar su ruta
         if ($request->hasFile('foto')) {
-            $data['urlfoto'] = $request->file('foto')->store('public/images');
+            $room['urlfoto'] = $request->file('foto')->store('public/images');
         } else {
-            $data['urlfoto'] = 'default.jpg'; // Imagen por defecto si no se sube ninguna
+            $room['urlfoto'] = 'default.jpg'; // Imagen por defecto si no se sube ninguna
         }
 
         // Asignar valores adicionales
-        $data['banopriv'] = $request->has('banopriv') ? 1 : 0;
-        $data['television'] = $request->has('television') ? 1 : 0;
-        $data['aireac'] = $request->has('aireac') ? 1 : 0;
-        $data['disponible'] = 1;
+        $room['banopriv'] = $request->has('banopriv') ? 1 : 0;
+        $room['television'] = $request->has('television') ? 1 : 0;
+        $room['aireac'] = $request->has('aireac') ? 1 : 0;
+        $room['disponible'] = 1;
 
         // Crear la habitación
-        Room::create($data);
+        Room::create($room);
 
         // Redireccionar con mensaje de éxito
         return redirect()->route('rooms.admin');
@@ -96,4 +99,17 @@ class RoomsController extends Controller
         $room->save();
         return redirect()->route('rooms.admin');
     }
+    public function toggleDisp(Request $request, $id)
+    {
+        // Encuentra la habitación
+        $room = Room::findOrFail($id);
+
+        // Cambia el estado de disponibilidad
+        $room->disponible = !$room->disponible;
+        $room->save();
+
+        // Redirige de vuelta con un mensaje de éxito
+        return redirect()->route('rooms.admin');
+    }
+
 }

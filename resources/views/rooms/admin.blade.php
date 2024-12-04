@@ -2,10 +2,11 @@
 
 @section('main-content')
 
-{{-- tabla de habitaciones --}}
+{{-- Tabla de habitaciones --}}
 <div class="card text-white bg-dark mt-4">
     <div class="card-body">
         <h3 class="card-title text-center mb-3">HABITACIONES</h3>
+        {{-- Barra de búsqueda --}}
         <div class="row mb-3">
             <form class="d-flex" role="search" method="GET" action="{{ route('rooms.admin') }}">
                 <input 
@@ -15,17 +16,21 @@
                     placeholder="Buscar habitación" 
                     aria-label="Search" 
                     value="{{ $search ?? '' }}"> <!-- Preserva el valor ingresado -->
-                <button class="btn btn-success" type="submit">Buscar</button>
+                <button class="btn btn-success" type="submit">
+                    <span class="material-icons">search</span>
+                </button>
             </form>
         </div>
-        <table class="table">
-            <thead>
+        {{-- Tabla de habitaciones --}}
+        <table class="table table-hover align-middle text-center text-white">
+            <thead class="table-dark">
                 <tr>
-                    <th>Habitacion</th>
+                    <th>Habitación</th>
                     <th>Tipo</th>
                     <th>Precio</th>
                     <th>Disponible</th>
-                    <th colspan="2">Acciones</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,22 +40,37 @@
                     <td>{{ $room->type->nombre }}</td>
                     <td>${{ $room->precio }}</td>
                     <td>
-                        <span class="material-icons" style="font-size: 20px;">{{ $room->disponible == '1' ? 'check' : 'close'}}</span>
+                        <form method="POST" action="{{ route('rooms.toggle', $room->id) }}">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" 
+                                    class="btn btn-sm {{ $room->disponible ? 'btn-success' : 'btn-danger' }}" 
+                                    title="{{ $room->disponible ? 'Disponible' : 'No disponible' }}">
+                                <span class="material-icons">
+                                    {{ $room->disponible ? 'check' : 'close' }}
+                                </span>
+                            </button>
+                        </form>
                     </td>
                     <td>
-                        <div class="d-grid">
-                            <a href="{{ route('rooms.edit',$room->id) }}" class="btn btn-sm btn-warning pb-0 text-white" data-bs-title="Editar">
-                                <span class="material-icons" style="font-size: 20px;">edit</span>
-                            </a>
-                        </div>
+                        <a href="{{ route('rooms.edit', $room->id) }}" 
+                           class="btn btn-sm btn-warning text-white" 
+                           title="Editar">
+                            <span class="material-icons">edit</span>
+                        </a>
                     </td>
                     <td>
-                        <form method="POST" action="{{ route('rooms.destroy', $room->id) }}" id="deleteForm{{ $room->id }}">
+                        <form method="POST" action="{{ route('rooms.destroy', $room->id) }}">
                             @csrf
                             @method("delete")
-                            <button type="button" class="btn btn-sm btn-danger pb-0 text-white" data-bs-toggle="modal" data-bs-target="#modalDelete" 
-                                data-bs-room-id="{{ $room->id }}" data-bs-action="{{ route('rooms.destroy', $room->id) }}">
-                                <span class="material-icons" style="font-size: 20px;">delete</span>
+                            <button type="button" 
+                                    class="btn btn-sm btn-danger text-white" 
+                                    title="Eliminar"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#modalDelete"
+                                    data-bs-room-id="{{ $room->id }}"
+                                    data-bs-action="{{ route('rooms.destroy', $room->id) }}">
+                                <span class="material-icons">delete</span>
                             </button>
                         </form>
                     </td>
@@ -58,8 +78,12 @@
                 @endforeach
             </tbody>
         </table>
+        {{-- Botón de agregar habitación --}}
         <div class="d-grid">
-            <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#modalRoom">Agregar habitacion</button>
+            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalRoom">
+                <span class="material-icons align-middle">add</span>
+                <span class="align-middle">Agregar Habitación</span>
+            </button>
         </div>
     </div>
 </div>
@@ -77,9 +101,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <form id="deleteForm" method="POST" action="{{ route('rooms.destroy', $room->id) }}" style="display: inline;">
+                <form id="deleteForm" method="POST" action="">
                     @csrf
-                    @method("delete")
+                    @method('DELETE')
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>
             </div>
@@ -178,14 +202,17 @@
 @endif
 
 <script>
-    var deleteModal = document.getElementById('deleteModal');
-    deleteModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget;
-        var roomId = button.getAttribute('data-bs-room-id');
-        var action = button.getAttribute('data-bs-action');
+    document.addEventListener('DOMContentLoaded', function () {
+        var modalDelete = document.getElementById('modalDelete');
+        modalDelete.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget; // Botón que disparó el modal
+            var roomId = button.getAttribute('data-bs-room-id'); // ID de la habitación
+            var action = button.getAttribute('data-bs-action'); // Ruta de eliminación
 
-        var deleteForm = document.getElementById('deleteForm');
-        deleteForm.action = action;
+            // Actualizar el formulario del modal
+            var deleteForm = modalDelete.querySelector('#deleteForm');
+            deleteForm.action = action;
+        });
     });
 </script>
 

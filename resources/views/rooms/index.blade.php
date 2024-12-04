@@ -60,7 +60,7 @@
                         </div>
                         <div class="modal-footer bg-dark text-white">
                             <div class="d-grid">
-                                <a class="btn btn-primary">Reservar</a>
+                                <a href="{{ route('reservations.form', ['id' => $room->id]) }}" class="btn btn-primary">Reservar</a>
                             </div>
                         </div>
                     </div>
@@ -70,6 +70,4 @@
         </div>
     </div>
 </div>
-
-
 @endsection
