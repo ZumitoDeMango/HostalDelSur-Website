@@ -20,7 +20,7 @@ class CreateRoomRequest extends FormRequest
             'banopriv' => 'nullable|boolean',
             'television' => 'nullable|boolean',
             'aireac' => 'nullable|boolean',
-            'descripcion' => 'nullable|string|max:1000',
+            'descripcion' => 'required|string|max:1000',
             'piso' => 'required|integer|min:1',
             'foto' => 'nullable|image|max:2048',
         ];
@@ -33,6 +33,7 @@ class CreateRoomRequest extends FormRequest
             'tipo.exists' => 'Debe seleccionar un tipo de habitación.',
             'precio.required' => 'El precio es obligatorio.',
             'precio.numeric' => 'El precio debe ser un número válido.',
+            'descripcion.required' => 'La descripción es obligatoria',
             'piso.required' => 'El piso es obligatorio.',
             'foto.image' => 'La foto debe ser una imagen válida.',
             'foto.max' => 'La foto no debe superar los 2 MB.',

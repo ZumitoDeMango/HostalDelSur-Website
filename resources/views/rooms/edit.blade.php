@@ -23,11 +23,11 @@
                 <div class="mb-3">
                     <label for="tipo" class="form-label">Tipo</label>
                     <select id="tipo" name="tipo" class="form-select">
-                        <option value="Single" {{ $room->tipo == 'Single' ? 'selected' : '' }}>Single</option>
-                        <option value="Twin" {{ $room->tipo == 'Twin' ? 'selected' : '' }}>Twin</option>
-                        <option value="Doble" {{ $room->tipo == 'Doble' ? 'selected' : '' }}>Doble</option>
-                        <option value="Triple" {{ $room->tipo == 'Triple' ? 'selected' : '' }}>Triple</option>
-                        <option value="Cuatruple" {{ $room->tipo == 'Cuatruple' ? 'selected' : '' }}>Cuatruple</option>
+                        @foreach($types as $type)
+                            <option value="{{ $type->id }}" {{ $room->tipo == $type->id ? 'selected' : '' }}>
+                                {{ $type->nombre }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="mb-3">
