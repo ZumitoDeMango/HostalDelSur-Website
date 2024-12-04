@@ -17,26 +17,26 @@ class CreateRoomRequest extends FormRequest
             'nombre' => 'required|string|max:255',
             'tipo' => 'required|exists:types,id',
             'precio' => 'required|numeric|min:0',
-            'banopriv' => 'nullable|boolean',
-            'television' => 'nullable|boolean',
-            'aireac' => 'nullable|boolean',
             'descripcion' => 'required|string|max:1000',
             'piso' => 'required|integer|min:1',
-            'foto' => 'nullable|image|max:2048',
+            'foto' => 'required|array',
+            'foto.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 
     public function messages()
     {
         return [
-            'nombre.required' => 'El nombre de la habitación es obligatorio.',
-            'tipo.exists' => 'Debe seleccionar un tipo de habitación.',
-            'precio.required' => 'El precio es obligatorio.',
-            'precio.numeric' => 'El precio debe ser un número válido.',
-            'descripcion.required' => 'La descripción es obligatoria',
-            'piso.required' => 'El piso es obligatorio.',
-            'foto.image' => 'La foto debe ser una imagen válida.',
-            'foto.max' => 'La foto no debe superar los 2 MB.',
+            'nombre.required' => 'Por favor, ingresa el nombre de la habitación.',
+            'tipo.exists' => 'Selecciona un tipo de habitación válido.',
+            'precio.required' => 'El campo de precio es obligatorio.',
+            'precio.numeric' => 'El precio debe ser un valor numérico válido.',
+            'descripcion.required' => 'La descripción de la habitación es obligatoria.',
+            'piso.required' => 'Indica en qué piso se encuentra la habitación.',
+            'foto.required' => 'Es necesario subir al menos una foto de la habitación.',
+            'foto.array' => 'Las fotos deben enviarse como un conjunto de archivos.',
+            'foto.*.mimes' => 'Cada foto debe estar en formato JPEG, PNG o JPG.',
+            'foto.*.max' => 'Cada foto no puede exceder los 2 MB de tamaño.',
         ];
     }
 }

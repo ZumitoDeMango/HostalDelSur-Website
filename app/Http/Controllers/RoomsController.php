@@ -48,26 +48,25 @@ class RoomsController extends Controller
 
     public function store(CreateRoomRequest $request)
     {
-        // Procesar los datos validados
         $room = $request->validated();
-
-        // Subir la imagen si existe y guardar su ruta
+        
+        $filePaths = [];
         if ($request->hasFile('foto')) {
-            $room['urlfoto'] = $request->file('foto')->store('public/images');
-        } else {
-            $room['urlfoto'] = 'default.jpg'; // Imagen por defecto si no se sube ninguna
+            foreach ($request->file('foto') as $file) {
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('images', $fileName, 'public');
+                $filePaths[] = $filePath;
+            }
         }
-
-        // Asignar valores adicionales
+        
         $room['banopriv'] = $request->has('banopriv') ? 1 : 0;
         $room['television'] = $request->has('television') ? 1 : 0;
         $room['aireac'] = $request->has('aireac') ? 1 : 0;
         $room['disponible'] = 1;
+        $room['urlfoto'] = json_encode($filePaths);
 
-        // Crear la habitación
         Room::create($room);
 
-        // Redireccionar con mensaje de éxito
         return redirect()->route('rooms.admin');
     }
 

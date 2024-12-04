@@ -115,7 +115,7 @@
 <div class="modal fade" id="modalRoom" tabindex="-1" aria-labelledby="agregarLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content bg-dark text-white">
-            <form method="POST" action="{{ route('rooms.store') }}">
+            <form method="POST" action="{{ route('rooms.store') }}" enctype="multipart/form-data">
             @csrf
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="agregarLabel">Agregar habitacion</h1>
@@ -177,12 +177,21 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="foto" class="form-label">Foto</label>
-                        <input id="foto" class="form-control" type="file">
+                        <label for="foto" class="form-label">Fotos</label>
+                        <input id="foto" name="foto[]" class="form-control" type="file" multiple>
                         @error('foto')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Agregar</button>

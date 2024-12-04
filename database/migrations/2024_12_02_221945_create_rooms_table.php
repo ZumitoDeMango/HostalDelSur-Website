@@ -11,6 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('types', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+        });
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
@@ -19,10 +23,10 @@ return new class extends Migration
             $table->boolean('banopriv');
             $table->boolean('television');
             $table->boolean('aireac');
-            $table->string('descripcion');
+            $table->text('descripcion');
             $table->integer('piso');
             $table->boolean('disponible');
-            $table->string('urlfoto');
+            $table->json('urlfoto');
 
             $table->foreign('tipo')->references('id')->on('types')->onDelete('cascade');
         });
@@ -34,5 +38,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('rooms');
+        Schema::dropIfExists('types');
     }
 };
