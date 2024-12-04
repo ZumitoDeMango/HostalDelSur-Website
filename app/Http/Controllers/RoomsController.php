@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
 use App\Models\Type;
 use App\Http\Requests\CreateRoomRequest;
+use App\Http\Requests\UpdateRoomRequest;
 
 class RoomsController extends Controller
 {
@@ -54,7 +55,7 @@ class RoomsController extends Controller
         if ($request->hasFile('foto')) {
             foreach ($request->file('foto') as $file) {
                 $fileName = time() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('images', $fileName, 'public');
+                $filePath = $file->storeAs('rooms', $fileName, 'public');
                 $filePaths[] = $filePath;
             }
         }
@@ -82,32 +83,57 @@ class RoomsController extends Controller
         $types = Type::all();
         return view('rooms.edit', compact('room', 'types'));
     }
-    public function update(Request $request, $id)
+    public function update(UpdateRoomRequest $request, $id)
     {
-        $room = Room::findOrFail($id); 
-        $room->nombre = $request->nombre;
-        $room->tipo = $request->tipo;
-        $room->precio = $request->precio;
-        $room->banopriv = $request->has('banopriv') ? 1 : 0;
-        $room->television = $request->has('television') ? 1 : 0;
-        $room->aireac = $request->has('aireac') ? 1 : 0;
-        $room->descripcion = $request->descripcion;
-        $room->piso = $request->piso;
-        $room->disponible = 1;
-        $room->urlfoto = 'foto.jpg';
+        $validated = $request->validated();
+        $room = Room::findOrFail($id);
+
+        $room->nombre = $request->input('nombre');
+        $room->tipo = $request->input('tipo');
+        $room->precio = $request->input('precio');
+        $room->banopriv = $request->has('banopriv');
+        $room->television = $request->has('television');
+        $room->aireac = $request->has('aireac');
+        $room->descripcion = $request->input('descripcion');
+        $room->piso = $request->input('piso');
+        
+        // Eliminar fotos seleccionadas
+        if ($request->has('remove_photos')) {
+            $photosToRemove = $request->input('remove_photos');
+            foreach ($photosToRemove as $photo) {
+                $path = storage_path('app/public/' . $photo);
+                if (file_exists($path)) {
+                    unlink($path); // Eliminar la foto del sistema de archivos
+                }
+            }
+    
+            // Filtrar las fotos restantes
+            $currentPhotos = json_decode($room->urlfoto, true);
+            $remainingPhotos = array_filter($currentPhotos, fn($photo) => !in_array($photo, $photosToRemove));
+            $room->urlfoto = json_encode(array_values($remainingPhotos));
+        }
+    
+        // Subir nuevas fotos
+        if ($request->hasFile('foto')) {
+            $newPhotos = [];
+            foreach ($request->file('foto') as $photo) {
+                $newPhotos[] = $photo->store('rooms', 'public');
+            }
+        
+            $currentPhotos = json_decode($room->urlfoto, true);
+            $room->urlfoto = json_encode(array_merge($currentPhotos, $newPhotos));
+        }
+    
         $room->save();
         return redirect()->route('rooms.admin');
     }
     public function toggleDisp(Request $request, $id)
     {
-        // Encuentra la habitación
         $room = Room::findOrFail($id);
 
-        // Cambia el estado de disponibilidad
         $room->disponible = !$room->disponible;
         $room->save();
 
-        // Redirige de vuelta con un mensaje de éxito
         return redirect()->route('rooms.admin');
     }
 
