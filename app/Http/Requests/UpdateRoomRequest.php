@@ -22,7 +22,7 @@ class UpdateRoomRequest extends FormRequest
             'foto' => 'nullable|array',
             'foto.*' => 'image|mimes:jpeg,png,jpg|max:2048',
             'remove_photos' => 'nullable|array',
-            'remove_photos.*' => 'exists:room_photos,filename',
+            'remove_photos.*' => 'string',
         ];
     }
 

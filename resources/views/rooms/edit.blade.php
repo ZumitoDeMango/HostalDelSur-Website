@@ -79,10 +79,10 @@
                         @foreach(json_decode($room->urlfoto, true) as $photo)
                             <div class="col-3 position-relative">
                                 <img src="{{ asset('storage/' . $photo) }}" alt="Foto de la habitación" class="img-thumbnail" style="width: 100%; height: 200px; object-fit: cover;" />
-                                <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" onclick="removePhoto('{{ $photo }}')" style="z-index: 10;">
+                                <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" onclick="removePhoto(this, '{{ $photo }}')">
                                     <span class="material-icons">delete</span>
                                 </button>
-                                <input type="checkbox" name="remove_photos[]" value="{{ $photo }}" style="display:none;" />
+                                <input type="checkbox" name="remove_photos[]" value="{{ $photo }}" class="remove-photo-checkbox" style="display:none;" />
                             </div>
                         @endforeach
                     </div>
@@ -101,9 +101,17 @@
     </div>
 </div>
 <script>
-    function removePhoto(photo) {
-        let input = document.querySelector(`input[value='${photo}']`);
-        input.checked = !input.checked;
+    function removePhoto(button, photo) {
+        const checkbox = button.nextElementSibling; // Encuentra el input checkbox
+        checkbox.checked = !checkbox.checked;
+
+        // Cambia el estilo de la imagen o botón para indicar que está marcada para eliminar
+        if (checkbox.checked) {
+            button.closest('.col-3').style.opacity = '0.5';
+        } else {
+            button.closest('.col-3').style.opacity = '1';
+        }
     }
+
 </script>
 @endsection
