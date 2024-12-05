@@ -24,9 +24,8 @@
         <table class="table table-hover align-middle text-center text-white">
             <thead class="table-dark">
                 <tr>
-                    <th>ID Reserva</th>
-                    <th>Cliente</th>
                     <th>Fecha</th>
+                    <th>Cliente</th>
                     <th>Total Noches</th>
                     <th>Total Precio</th>
                     <th>Detalles</th>
@@ -36,20 +35,19 @@
             <tbody>
                 @foreach($reservations as $reservation)
                 <tr>
-                    <td>{{ $reservation->id }}</td>
-                    <td>{{ $reservation->nombre }}</td>
                     <td>{{ $reservation->fecha_reserva->format('d/m/Y') }}</td>
+                    <td>{{ $reservation->nombre }}</td>
                     <td>{{ $reservation->total_noches }}</td>
                     <td>${{ $reservation->total_precio }}</td>
                     <td>
-                        <a href="{{ route('reservations.details', $reservation->id) }}" 
+                        <a href="{{-- {{ route('reservations.details', $reservation->id) }} --}}" 
                            class="btn btn-sm btn-info text-white" 
                            title="Ver detalles">
                             <span class="material-icons">visibility</span>
                         </a>
                     </td>
                     <td>
-                        <form method="POST" action="{{ route('reservations.destroy', $reservation->id) }}">
+                        <form method="POST" action="{{-- {{ route('reservations.destroy', $reservation->id) }} --}}">
                             @csrf
                             @method("delete")
                             <button type="button" 
@@ -58,7 +56,7 @@
                                     data-bs-toggle="modal" 
                                     data-bs-target="#modalDelete"
                                     data-bs-reservation-id="{{ $reservation->id }}"
-                                    data-bs-action="{{ route('reservations.destroy', $reservation->id) }}">
+                                    data-bs-action="{{-- {{ route('reservations.destroy', $reservation->id) }} --}}">
                                 <span class="material-icons">delete</span>
                             </button>
                         </form>

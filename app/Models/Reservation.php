@@ -20,6 +20,11 @@ class Reservation extends Model
         'total_precio',
     ];
 
+    protected $dates = ['fecha_reserva'];
+    protected $casts = [
+        'fecha_reserva' => 'datetime',
+    ];
+    
     public function stays()
     {
         return $this->hasMany(Stay::class, 'reserva');
