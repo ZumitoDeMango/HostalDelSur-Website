@@ -23,7 +23,7 @@ Route::prefix('/')->group(function () {
     // Formularios
     Route::get('/reserva/{id}', [ReservationsController::class, 'form'])->name('reservations.form');
     Route::post('/reserva', [ReservationsController::class, 'store'])->name('reservations.store');
-    Route::get('/pago', [PaymentsController::class, 'form'])->name('payments.form');
+    Route::get('/pago/{id}', [PaymentsController::class, 'form'])->name('payments.form');
     Route::post('/pago', [PaymentsController::class, 'process'])->name('payments.process');
 });
 
@@ -50,9 +50,9 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::get('/reservas', [ReservationsController::class, 'admin'])->name('reservations.admin');
 
     // Rutas para pagos
-    Route::get('/pagos', [AdminController::class, 'payments'])->name('admin.payments');
+    Route::get('/pagos', [PaymentsController::class, 'admin'])->name('payments.admin');
 
     // Rutas para administradores
-    Route::get('/administradores', [AdminController::class, 'admins'])->name('admin.admins');
+    Route::get('/admins', [UsersController::class, 'admin'])->name('users.admin');
 });
 

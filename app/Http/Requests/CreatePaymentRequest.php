@@ -16,7 +16,7 @@ class CreatePaymentRequest extends FormRequest
         return [
             'reserva' => 'required|exists:reservations,id',
             'monto' => 'required|numeric|min:0',
-            'metodo_pago' => 'required|string|in:transferencia,tarjeta,paypal',
+            'metodo_pago' => 'required|string|in:transferencia,tarjeta,efectivo',
         ];
     }
 
@@ -26,6 +26,7 @@ class CreatePaymentRequest extends FormRequest
             'reserva.required' => 'El ID de la reserva es obligatorio.',
             'reserva.exists' => 'La reserva no existe.',
             'monto.required' => 'El monto a pagar es obligatorio.',
+            'metodo_pago.required' => 'El método de pago es obligatorio.',
             'metodo_pago.in' => 'El método de pago seleccionado no es válido.',
         ];
     }

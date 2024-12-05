@@ -47,11 +47,11 @@
                     role="button">RESERVAS</a>
                 </div>
                 <div class="d-grid mb-3">
-                    <a class="btn btn-primary" href="{{ route('admin.payments') }}" 
+                    <a class="btn btn-primary" href="{{ route('payments.admin') }}" 
                     role="button">PAGOS</a>
                 </div>
                 <div class="d-grid mb-3">
-                    <a class="btn btn-primary" href="{{ route('admin.admins') }}" 
+                    <a class="btn btn-primary" href="{{ route('users.admin') }}" 
                     role="button">ADMINISTRADORES</a>
                 </div>
             </div>

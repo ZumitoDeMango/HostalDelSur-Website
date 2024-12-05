@@ -54,7 +54,7 @@ class ReservationsController extends Controller
             'fecha_fin' => $end,
         ]);
 
-        return redirect()->route('payments.form', ['reserva' => $reservation->id]);
+        return redirect()->route('payments.form', ['id' => $reservation->id]);
     }
 
     public function admin(Request $request)

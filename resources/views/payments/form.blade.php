@@ -7,30 +7,33 @@
             <div class="card text-white bg-dark">
                 <div class="card-body">
                     <h1 class="text-center">Seleccionar Método de Pago</h1>
-                    <p class="text-center">Por favor, elige tu método de pago preferido para completar tu reserva.</p>
+                    <p class="text-center">Por favor, elige tu método de pago preferido para completar tu reserva.<p>
 
                     <div class="row justify-content-center mt-4">
                         <div class="col-md-6">
-                            <form action="{{-- {{ route('payment.process') }} --}}" method="POST">
+                            <form action="{{ route('payments.process') }}" method="POST">
                                 @csrf
-                                <div class="form-group mb-3">
-                                    <label for="reserva" class="form-label">ID de la Reserva</label>
-                                    <input type="text" class="form-control" id="reserva" name="reserva" value="{{-- {{ $reserva->id ?? '' }} --}}" readonly>
+                                
+                                <div>
+                                    <input type="hidden" name="reserva" value="{{ $reservation->id }}">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="monto" class="form-label">Monto a Pagar</label>
-                                    <input type="text" class="form-control" id="monto" name="monto" value="{{-- {{ $reserva->total_precio ?? '' }} --}}" readonly>
+                                    <input type="text" class="form-control" id="monto" name="monto" value="{{ $reservation->total_precio }}" readonly>
                                 </div>
 
                                 <div class="form-group mb-4">
                                     <label for="metodo_pago" class="form-label">Método de Pago</label>
-                                    <select class="form-select" id="metodo_pago" name="metodo_pago" required>
-                                        <option value="" disabled selected>Selecciona un método</option>
+                                    <select class="form-select" id="metodo_pago" name="metodo_pago">
+                                        <option value="" selected>Selecciona un método</option>
                                         <option value="transferencia">Transferencia Bancaria</option>
                                         <option value="tarjeta">Tarjeta de Crédito/Débito</option>
-                                        <option value="paypal">PayPal</option>
+                                        <option value="efectivo">Efectivo</option>
                                     </select>
+                                    @error('metodo_pago')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group text-center">
