@@ -1,4 +1,6 @@
 <?php
+/* Route::get()->name(); */
+/* @dd($rooms); */
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -8,8 +10,6 @@ use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\UsersController;
 
-/* Route::get()->name(); */
-/* @dd($rooms); */
 // Rutas Home
 Route::prefix('/')->group(function () {
     // Rutas del navbar
@@ -45,14 +45,15 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::get('/habitaciones/{id}/edit', [RoomsController::class, 'edit'])->name('rooms.edit');
     Route::patch('/habitaciones/{id}', [RoomsController::class, 'update'])->name('rooms.update');
     Route::patch('/habitaciones/{id}/toggle', [RoomsController::class, 'toggleDisp'])->name('rooms.toggle');
-
+    
     // Rutas para reservas
     Route::get('/reservas', [ReservationsController::class, 'admin'])->name('reservations.admin');
-
+    
     // Rutas para pagos
     Route::get('/pagos', [PaymentsController::class, 'admin'])->name('payments.admin');
-
+    
     // Rutas para administradores
     Route::get('/admins', [UsersController::class, 'admin'])->name('users.admin');
+    Route::delete('/admins/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
 });
 
