@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('main-content')
-<div class="container vh-100 d-flex justify-content-center align-items-center">
+<div class="container mt-4 d-flex justify-content-center align-items-center">
     <div class="row">
         <div class="col-md-12">
             <div class="card bg-dark p-4">

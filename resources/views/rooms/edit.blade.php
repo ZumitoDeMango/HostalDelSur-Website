@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-lg-3 d-grid d-lg-flex align-items-center justify-content-lg-between">
                     <button type="submit" class="btn btn-success">Guardar</button>
-                    <a href="{{ route('rooms.admin') }}" class="btn btn-warning text-white">Regresar</a>
+                    <a href="{{ route('rooms.admin') }}" class="btn btn-danger text-white">Regresar</a>
                 </div>
             </div>
             <div class="row">

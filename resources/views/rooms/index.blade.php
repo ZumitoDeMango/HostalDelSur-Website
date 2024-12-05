@@ -49,7 +49,10 @@
                         </div>
                         <div class="modal-body">
                             <div class="image-container-card mb-3">
-                                <img src="{{ asset("images/hab1.jpeg") }}" class="img-fluid card-img-top" alt="...">
+                                @php
+                                    $photos = json_decode($room->urlfoto, true);
+                                @endphp
+                                <img src="{{ asset('storage/' . $photos[0]) }}" class="img-fluid card-img-top" alt="Foto">
                             </div>
                             <div class="row">
                                 <p>{{ $room->descripcion }}</p>

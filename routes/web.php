@@ -8,9 +8,11 @@ use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\UsersController;
 
+/* Route::get()->name(); */
 /* @dd($rooms); */
 // Rutas Home
 Route::prefix('/')->group(function () {
+    // Rutas del navbar
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
     Route::get('/sobre-nosotros', [HomeController::class, 'about'])->name('home.about');
     Route::get('/habitaciones', [RoomsController::class, 'index'])->name('rooms.index');
@@ -18,11 +20,15 @@ Route::prefix('/')->group(function () {
     Route::get('/ubicacion', [HomeController::class, 'location'])->name('home.location');
     Route::get('/contacto', [HomeController::class, 'contact'])->name('home.contact');
     
+    // Formularios
     Route::get('/reserva/{id}', [ReservationsController::class, 'form'])->name('reservations.form');
+    Route::post('/reserva', [ReservationsController::class, 'store'])->name('reservations.store');
+    Route::get('/pago', [PaymentsController::class, 'form'])->name('payments.form');
+    Route::post('/pago', [PaymentsController::class, 'process'])->name('payments.process');
 });
 
 // Rutas Login Admin
-Route::prefix('')->group(function () {
+Route::prefix('/')->group(function () {
     Route::get('/login', [AdminController::class, 'showLogin'])->name('login');
     Route::post('/login', [AdminController::class, 'login'])->name('admin.submit');
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');

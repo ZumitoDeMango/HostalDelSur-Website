@@ -5,10 +5,20 @@
 
 .btn-primary {
     background-color: gold;
-    border-color: goldenrod;
+    border-color: gold;
 }
 
 .btn-primary:hover {
+    background-color: goldenrod;
+    border-color: goldenrod;
+}
+
+.btn-secondary {
+    background-color: gold;
+    border-color: gold;
+}
+
+.btn-secondary:hover {
     background-color: goldenrod;
     border-color: goldenrod;
 }

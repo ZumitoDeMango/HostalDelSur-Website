@@ -9,13 +9,15 @@ class Reservation extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
+        'fecha_reserva',
         'rut_o_pasaporte',
         'nombre',
         'correo',
         'fono',
         'info_adicional',
-        'fecha_reserva',
         'total_noches',
         'total_precio',
     ];
