@@ -18,6 +18,7 @@
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         {{-- link css --}}
         <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     </head>
     <body>
         <header>
@@ -89,5 +90,7 @@
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
         ></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/rangePlugin.js"></script>
     </body>
 </html>
