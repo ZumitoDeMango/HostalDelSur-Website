@@ -15,6 +15,7 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
+            'rut' => '33333333-3',
             'name' => 'Admin Test 3',
             'email' => 'admin3@example.com',
             'password' => Hash::make('password'), // Cifrado de la contraseña
@@ -23,6 +24,7 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
         DB::table('users')->insert([
+            'rut' => '22222222-2',
             'name' => 'Admin Test 2',
             'email' => 'admin2@example.com',
             'password' => Hash::make('password'), // Cifrado de la contraseña
@@ -31,6 +33,7 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
         DB::table('users')->insert([
+            'rut' => '11111111-1',
             'name' => 'Admin Test 1',
             'email' => 'admin1@example.com',
             'password' => Hash::make('password'), // Cifrado de la contraseña

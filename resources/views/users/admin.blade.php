@@ -8,6 +8,7 @@
         <table class="table table-hover align-middle text-center text-white">
             <thead class="table-dark">
                 <tr>
+                    <th>RUT</th>
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>Nivel</th>
@@ -18,6 +19,7 @@
             <tbody>
                 @foreach($users as $user)
                 <tr>
+                    <td>{{ $user->rut }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->level }}</td>
@@ -65,13 +67,6 @@
         @if(Auth::user()->level >= 3)
             <div class="d-grid">
                 <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalReservation">
-                    <span class="material-icons align-middle">add</span>
-                    <span class="align-middle">Agregar Admin</span>
-                </button>
-            </div>
-        @else
-            <div class="d-grid">
-                <button type="button" class="btn btn-primary btn-lg" disabled>
                     <span class="material-icons align-middle">add</span>
                     <span class="align-middle">Agregar Admin</span>
                 </button>

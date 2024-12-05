@@ -9,7 +9,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>N° habitacion</th>
+                            <th>Nombre habitacion</th>
                             <th>Nombre huesped</th>
                             <th>Check</th>
                             <th>Fecha</th>
@@ -31,6 +31,7 @@
                     </tbody>
                 </table>
                 <h4 class="card-title mb-3 text-center">RESUMEN DE GANANCIAS</h4>
+                <h4 class="card-title mb-3 text-center">PAGOS PENDIENTES</h4>
             </div>
         </div>
     </div>
