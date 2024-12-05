@@ -34,10 +34,8 @@ class RoomsController extends Controller
         $rooms = Room::all();
         $types = Type::all();
 
-        // Obtener el término de búsqueda desde la solicitud
         $search = $request->input('search');
 
-        // Obtener habitaciones filtradas o todas si no hay búsqueda
         $rooms = Room::with('type')
             ->when($search, function ($query, $search) {
                 $query->where('nombre', 'LIKE', '%' . $search . '%');
@@ -117,9 +115,10 @@ class RoomsController extends Controller
         if ($request->hasFile('foto')) {
             $newPhotos = [];
             foreach ($request->file('foto') as $photo) {
-                $newPhotos[] = $photo->store('rooms', 'public');
+                $fileName = time() . '_' . $photo->getClientOriginalName();
+                $filePath = $photo->storeAs('rooms', $fileName, 'public');
+                $newPhotos[] = $filePath;
             }
-        
             $currentPhotos = json_decode($room->urlfoto, true);
             $room->urlfoto = json_encode(array_merge($currentPhotos, $newPhotos));
         }

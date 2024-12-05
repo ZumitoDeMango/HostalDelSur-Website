@@ -38,9 +38,8 @@ class RoomsTableSeeder extends Seeder
             'descripcion' => 'Acogedora habitacion',
             'piso' => 1,
             'disponible' => True,
-            'urlfoto' => json_encode(['image.png'])
+            'urlfoto' => json_encode(['hab1.jpeg'])
         ]);
-        
         DB::table('rooms')->insert([
             'nombre' => 'Habitacion 2',
             'tipo' => 1,
@@ -51,9 +50,8 @@ class RoomsTableSeeder extends Seeder
             'descripcion' => 'Hermosa habitacion',
             'piso' => 2,
             'disponible' => false,
-            'urlfoto' => json_encode(['image.png'])
+            'urlfoto' => json_encode(['hab1.jpeg'])
         ]);
-
         DB::table('rooms')->insert([
             'nombre' => 'Habitación 3',
             'tipo' => 2,
@@ -64,9 +62,8 @@ class RoomsTableSeeder extends Seeder
             'descripcion' => 'Habitación sencilla con vistas al jardín.',
             'piso' => 1,
             'disponible' => true,
-            'urlfoto' => json_encode(['image.png'])
+            'urlfoto' => json_encode(['hab1.jpeg'])
         ]);
-        
         DB::table('rooms')->insert([
             'nombre' => 'Habitación 4',
             'tipo' => 4,
@@ -77,9 +74,8 @@ class RoomsTableSeeder extends Seeder
             'descripcion' => 'Amplia habitación familiar, ideal para grupos.',
             'piso' => 2,
             'disponible' => true,
-            'urlfoto' => json_encode(['image.png'])
+            'urlfoto' => json_encode(['hab1.jpeg'])
         ]);
-        
         DB::table('rooms')->insert([
             'nombre' => 'Habitación 5',
             'tipo' => 5,
@@ -90,9 +86,8 @@ class RoomsTableSeeder extends Seeder
             'descripcion' => 'Habitación deluxe con balcón privado.',
             'piso' => 1,
             'disponible' => false,
-            'urlfoto' => json_encode(['image.png'])
+            'urlfoto' => json_encode(['hab1.jpeg'])
         ]);
-        
         DB::table('rooms')->insert([
             'nombre' => 'Habitación 6',
             'tipo' => 3,
@@ -103,9 +98,8 @@ class RoomsTableSeeder extends Seeder
             'descripcion' => 'Habitación moderna con decoración minimalista.',
             'piso' => 2,
             'disponible' => true,
-            'urlfoto' => json_encode(['image.png'])
+            'urlfoto' => json_encode(['hab1.jpeg'])
         ]);
-        
         DB::table('rooms')->insert([
             'nombre' => 'Habitación 7',
             'tipo' => 1,
@@ -116,9 +110,8 @@ class RoomsTableSeeder extends Seeder
             'descripcion' => 'Pequeña habitación económica, ideal para viajeros.',
             'piso' => 1,
             'disponible' => true,
-            'urlfoto' => json_encode(['image.png'])
+            'urlfoto' => json_encode(['hab1.jpeg'])
         ]);
-        
         DB::table('rooms')->insert([
             'nombre' => 'Habitación 8',
             'tipo' => 2,
@@ -129,7 +122,7 @@ class RoomsTableSeeder extends Seeder
             'descripcion' => 'Habitación con vista al patio interior.',
             'piso' => 2,
             'disponible' => false,
-            'urlfoto' => json_encode(['image.png'])
+            'urlfoto' => json_encode(['hab1.jpeg'])
         ]);
     }
 }

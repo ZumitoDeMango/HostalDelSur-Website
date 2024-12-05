@@ -25,7 +25,10 @@
             <div class="col-12 col-md-6 col-xl-4 d-flex flex-column align-items-stretch">
                 <div class="card mb-3">
                     <div class="image-container-card">
-                        <img src="{{ asset("images/hab1.jpeg") }}" class="img-fluid card-img-top" alt="...">
+                        @php
+                            $photos = json_decode($room->urlfoto, true);
+                        @endphp
+                        <img src="{{ asset('storage/' . $photos[0]) }}" class="img-fluid card-img-top" alt="Foto">
                     </div>
                     <div class="card-body d-flex flex-column justify-content-between">
                         <h5 class="card-title text-center mb-3">{{ $room->nombre }} - {{ $room->type->nombre }}</h5>

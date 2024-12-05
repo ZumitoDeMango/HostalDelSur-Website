@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\ReservationsController;
+use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\UsersController;
 
 /* @dd($rooms); */
 // Rutas Home
@@ -21,8 +23,8 @@ Route::prefix('/')->group(function () {
 
 // Rutas Login Admin
 Route::prefix('')->group(function () {
-    Route::get('/login', [AdminController::class, 'showLogin'])->name('admin.login');
-    Route::post('/login', [AdminController::class, 'login'])->name('admin.login.submit');
+    Route::get('/login', [AdminController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AdminController::class, 'login'])->name('admin.submit');
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 });
 
@@ -41,8 +43,10 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     // Rutas para reservas
     Route::get('/reservas', [ReservationsController::class, 'admin'])->name('reservations.admin');
 
-    // administradores y pagos
-    Route::get('/administradores', [AdminController::class, 'admins'])->name('admin.admins');
+    // Rutas para pagos
     Route::get('/pagos', [AdminController::class, 'payments'])->name('admin.payments');
+
+    // Rutas para administradores
+    Route::get('/administradores', [AdminController::class, 'admins'])->name('admin.admins');
 });
 

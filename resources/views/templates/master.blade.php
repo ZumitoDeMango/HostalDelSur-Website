@@ -55,7 +55,7 @@
                             <!-- Mostrar botón de logout si el usuario está autenticado -->
                             @if (Auth::check())
                                 <li class="nav-item">
-                                    <a class="nav-link @if(Route::current()->getName()=='admin.dashboard') active @endif" href="{{ route('admin.dashboard') }}">DASHBOARD</a>
+                                    <a class="nav-link @if(request()->is('dashboard*')) active @endif" href="{{ route('admin.dashboard') }}">DASHBOARD</a>
                                 </li>
                                 <li class="nav-item">
                                     <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
