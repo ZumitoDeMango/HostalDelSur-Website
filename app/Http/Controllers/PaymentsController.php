@@ -12,6 +12,7 @@ use App\Models\Reservation;
 use App\Models\Stay;
 use App\Models\Payment;
 use App\Http\Requests\CreatePaymentRequest;
+use Carbon\Carbon;
 
 class PaymentsController extends Controller
 {
@@ -37,13 +38,9 @@ class PaymentsController extends Controller
             'reserva' => $reserva->id,
             'monto' => $validated['monto'],
             'tipo_pago' => $validated['metodo_pago'],
-            'estado' => 'son validar',
+            'estado' => 'sin validar',
             'fecha_pago' => now(),
         ]);
-
-        $reserva->stays->each(function ($stay) {
-            $stay->room->update(['disponible' => false]);
-        });
 
         return redirect()->route('home.index');
     }

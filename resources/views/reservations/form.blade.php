@@ -113,7 +113,10 @@
         const precioTotalSpan = document.getElementById('precioTotal');
         const fechasInput = document.getElementById('fechas');
 
-        // Configuración de Flatpickr para seleccionar las fechas
+        // Obtener las fechas ocupadas desde PHP
+        const occupiedDates = @json($occupiedDates);
+
+        // Configurar Flatpickr
         flatpickr(fechasInput, {
             mode: "range",
             minDate: "today",
@@ -121,19 +124,12 @@
             locale: {
                 rangeSeparator: " hasta "
             },
+            disable: occupiedDates,
             onChange: function(selectedDates) {
                 // Verifica si se han seleccionado dos fechas
                 if (selectedDates.length === 2) {
                     let startDate = selectedDates[0];
                     let endDate = selectedDates[1];
-
-                    // Si la fecha de inicio es posterior a la de fin, intercambiamos las fechas
-                    if (startDate > endDate) {
-                        // Intercambiar fechas
-                        [startDate, endDate] = [endDate, startDate];
-                        // Actualizar las fechas seleccionadas en el campo de entrada
-                        fechasInput.value = `${formatDate(startDate)} hasta ${formatDate(endDate)}`;
-                    }
 
                     // Calcular la cantidad de noches
                     const totalNoches = Math.max(1, (endDate - startDate) / (1000 * 3600 * 24));
@@ -142,11 +138,6 @@
                 }
             }
         });
-
-        // Función para formatear las fechas
-        function formatDate(date) {
-            return date.getDate().toString().padStart(2, '0') + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getFullYear();
-        }
     });
 </script>
 

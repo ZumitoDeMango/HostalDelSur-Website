@@ -17,9 +17,26 @@ class ReservationsController extends Controller
 {
     public function form($id)
     {
-        $types = Type::all();
-        $room = Room::find($id);
-        return view('reservations.form', compact('room'));
+        $room = Room::findOrFail($id);
+
+        // Obtener todas las estancias asociadas a la habitación
+        $stays = Stay::where('habitacion', $id)->get();
+
+        // Crear un array de rangos ocupados
+        $occupiedDates = [];
+        foreach ($stays as $stay) {
+            $start = Carbon::parse($stay->fecha_inicio);
+            $end = Carbon::parse($stay->fecha_fin);
+
+            // Añadir cada día en el rango a un array
+            while ($start <= $end) {
+                $occupiedDates[] = $start->format('d-m-Y');
+                $start->addDay();
+            }
+        }
+
+        // Pasar las fechas ocupadas a la vista
+        return view('reservations.form', compact('room', 'occupiedDates'));
     }
 
     public function store(CreateReservationRequest $request) 

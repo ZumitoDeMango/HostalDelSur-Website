@@ -48,9 +48,11 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     
     // Rutas para reservas
     Route::get('/reservas', [ReservationsController::class, 'admin'])->name('reservations.admin');
+    Route::delete('/reservas/{id}', [ReservationsController::class, 'destroy'])->name('reservations.destroy');
     
     // Rutas para pagos
     Route::get('/pagos', [PaymentsController::class, 'admin'])->name('payments.admin');
+    Route::delete('/pagos/{id}', [PaymentsController::class, 'destroy'])->name('payments.destroy');
     
     // Rutas para administradores
     Route::get('/admins', [UsersController::class, 'admin'])->name('users.admin');

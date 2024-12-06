@@ -19,6 +19,11 @@ class Payment extends Model
         'fecha_pago',
     ];
 
+    protected $dates = ['fecha_pago'];
+    protected $casts = [
+        'fecha_pago' => 'datetime',
+    ];
+
     public function reservation()
     {
         return $this->belongsTo(Reservation::class, 'reserva');
