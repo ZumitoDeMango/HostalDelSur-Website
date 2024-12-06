@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow-sm border-0 p-3 rounded">
-                <h5 class="text-center mb-4">Información de Contacto</h5>
+                <h5 class="text-center display-4 fw-bold mb-4">Información de Contacto</h5>
                 <div class="list-group">
                     <div class="list-group-item copy-text d-flex justify-content-between align-items-center py-3" data-copy="Hostaldelsur@gmail.com">
                         <span><strong>Correo:</strong> Hostaldelsur@gmail.com</span>
