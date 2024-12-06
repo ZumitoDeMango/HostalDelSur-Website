@@ -9,29 +9,27 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Nombre habitacion</th>
-                            <th>Nombre huesped</th>
-                            <th>Check</th>
+                            <th>Nombre habitación</th>
+                            <th>Nombre huésped</th>
+                            <th>Acción</th>
                             <th>Fecha</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>7</th>
-                            <td>Pepito</td>
-                            <td>Entra</td>
-                            <td>12-10-2024</td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>Clarita</td>
-                            <td>Sale</td>
-                            <td>15-10-2024</td>
-                        </tr>
+                        @foreach($stays as $stay)
+                            <tr>
+                                <td>{{ $stay->room->nombre }}</td>
+                                <td>{{ $stay->reservation->nombre }}</td>
+                                <td>{{ $stay->fecha_inicio <= now() ? 'Entrada' : 'Salida' }}</td>
+                                <td>{{ $stay->fecha_inicio->format('d-m-Y') }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
-                <h4 class="card-title mb-3 text-center">RESUMEN DE GANANCIAS</h4>
-                <h4 class="card-title mb-3 text-center">PAGOS PENDIENTES</h4>
+                <h4 class="card-title mb-3 text-center">RESUMEN DE GANANCIAS MENSUALES</h4>
+                <p class="text-center text-white">
+                    Total de ganancias para este mes: ${{ number_format($monthlyIncome, 0, ',', '.') }}
+                </p>
             </div>
         </div>
     </div>
@@ -45,7 +43,7 @@
                 </div>
                 <div class="d-grid mb-3">
                     <a class="btn btn-primary" href="{{ route('reservations.admin') }}" 
-                    role="button">RESERVAS Y ESTADIAS</a>
+                    role="button">RESERVAS</a>
                 </div>
                 <div class="d-grid mb-3">
                     <a class="btn btn-primary" href="{{ route('payments.admin') }}" 

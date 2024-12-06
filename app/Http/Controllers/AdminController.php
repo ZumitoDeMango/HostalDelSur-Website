@@ -4,14 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Room;
+use App\Models\Type;
+use App\Models\Reservation;
+use App\Models\Stay;
+use App\Models\Payment;
 use App\Http\Requests\LoginRequest;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
     // mostrar dashboard
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $stays = Stay::with('room', 'reservation')->get();
+    
+        // Obtener los pagos pagados del mes actual
+        $monthlyIncome = Payment::where('estado', 'pagado')
+                                ->whereMonth('fecha_pago', Carbon::now()->month)
+                                ->whereYear('fecha_pago', Carbon::now()->year)
+                                ->sum('monto');
+        
+        return view('admin.dashboard', compact('stays', 'monthlyIncome'));
     }
     
     // login y logout

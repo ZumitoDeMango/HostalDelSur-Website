@@ -44,4 +44,15 @@ class PaymentsController extends Controller
 
         return redirect()->route('home.index');
     }
+
+    public function toggleStat($id)
+    {
+        $payment = Payment::findOrFail($id);
+        // Cambiar el estado
+        $payment->estado = $payment->estado == 'pagado' ? 'pendiente' : 'pagado';
+        $payment->save();
+
+        return redirect()->route('payments.admin');
+    }
+
 }

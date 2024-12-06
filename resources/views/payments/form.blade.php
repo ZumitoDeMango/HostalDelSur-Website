@@ -20,7 +20,7 @@
 
                                 <div class="form-group mb-3">
                                     <label for="monto" class="form-label">Monto a Pagar</label>
-                                    <input type="text" class="form-control" id="monto" name="monto" value="{{ $reservation->total_precio }}" readonly>
+                                    <input type="text" class="form-control" id="monto" name="monto" value="{{ number_format($reservation->total_precio, 0, ',', '.') }}" readonly>
                                 </div>
 
                                 <div class="form-group mb-4">

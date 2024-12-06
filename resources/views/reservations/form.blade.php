@@ -88,7 +88,7 @@
                     <p><strong>Nombre:</strong> {{ $room->nombre }}</p>
                     <p><strong>Tipo:</strong> {{ $room->type->nombre }}</p>
                     <p><strong>Descripción:</strong> {{ $room->descripcion }}</p>
-                    <p><strong>Precio por noche:</strong> ${{ $room->precio }}</p>
+                    <p><strong>Precio por noche:</strong> ${{ number_format($room->precio, 0, ',', '.') }}</p>
                 </div>
             </div>
 
@@ -98,8 +98,8 @@
                     <h5>Precio Aproximado</h5>
                 </div>
                 <div class="card-body">
-                    <p><strong>Total de noches:</strong> <span id="totalNoches">1</span></p>
-                    <p><strong>Precio total:</strong> $<span id="precioTotal">{{ $room->precio }}</span></p>
+                    <p><strong>Total de noches:</strong> <span id="totalNoches">0</span></p>
+                    <p><strong>Precio total:</strong> $<span id="precioTotal">0</span></p>
                 </div>
             </div>
         </div>
@@ -134,7 +134,13 @@
                     // Calcular la cantidad de noches
                     const totalNoches = Math.max(1, (endDate - startDate) / (1000 * 3600 * 24));
                     totalNochesSpan.textContent = totalNoches;
-                    precioTotalSpan.textContent = totalNoches * precioPorNoche;
+
+                    // Calcular el precio total y formatearlo
+                    const totalPrecio = totalNoches * precioPorNoche;
+
+                    // Usar toLocaleString para dar formato a la cantidad
+                    const precioTotalFormateado = totalPrecio.toLocaleString('es-CL'); // 'es-CL' para formato chileno
+                    precioTotalSpan.textContent = precioTotalFormateado;
                 }
             }
         });

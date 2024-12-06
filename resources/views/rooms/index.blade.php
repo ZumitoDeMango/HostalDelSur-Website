@@ -32,7 +32,7 @@
                     </div>
                     <div class="card-body d-flex flex-column justify-content-between">
                         <h5 class="card-title text-center mb-3">{{ $room->nombre }} - {{ $room->type->nombre }}</h5>
-                        <h6 class="text-center mb-3">Desde ${{ $room->precio }}</h6>
+                        <h6 class="text-center mb-3">Desde ${{ number_format($room->precio, 0, ',', '.') }}</h6>
                         <div class="d-grid gap-2">
                             <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#modalRoom{{ $room->id }}">Ver detalles</button>
                         </div>

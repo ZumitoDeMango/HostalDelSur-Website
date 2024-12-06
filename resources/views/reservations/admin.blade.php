@@ -24,7 +24,7 @@
         <table class="table table-hover align-middle text-center text-white">
             <thead class="table-dark">
                 <tr>
-                    <th>Fecha</th>
+                    <th>Hora y Fecha</th>
                     <th>Cliente</th>
                     <th>Total Noches</th>
                     <th>Total Precio</th>
@@ -35,7 +35,7 @@
             <tbody>
                 @foreach($reservations as $reservation)
                 <tr>
-                    <td>{{ $reservation->fecha_reserva->format('d/m/Y') }}</td>
+                    <td>{{ $reservation->fecha_reserva->format('H:i - d/m/Y') }}</td>
                     <td>{{ $reservation->nombre }}</td>
                     <td>{{ $reservation->total_noches }}</td>
                     <td>${{ $reservation->total_precio }}</td>

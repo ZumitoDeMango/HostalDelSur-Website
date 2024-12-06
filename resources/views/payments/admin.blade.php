@@ -29,7 +29,6 @@
                     <th>Monto pagado</th>
                     <th>Tipo de pago</th>
                     <th>Estado</th>
-                    <th>Detalles</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,25 +38,31 @@
                     <td>{{ $payment->reservation->nombre }}</td>
                     <td>${{ $payment->monto }}</td>
                     <td>{{ $payment->tipo_pago }}</td>
-                    <td>{{ $payment->estado }}</td>
                     <td>
-                        <a href="{{-- {{ route('payments.details', $payment->id) }} --}}" 
-                           class="btn btn-sm btn-info text-white" 
-                           title="Ver detalles">
-                            <span class="material-icons">visibility</span>
-                        </a>
+                        {{-- Botón para mostrar y cambiar el estado --}}
+                        <form action="{{ route('payments.toggle', $payment->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="btn btn-sm 
+                                {{ $payment->estado == 'pagado' ? 'btn-success' : 'btn-warning' }} text-white" 
+                                title="Cambiar estado">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <span class="material-icons">
+                                            {{ $payment->estado == 'pagado' ? 'check_circle' : 'pending' }}
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        {{ ucfirst($payment->estado) }}
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-        {{-- Botón de agregar pago --}}
-        <div class="d-grid">
-            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalPayment">
-                <span class="material-icons align-middle">add</span>
-                <span class="align-middle">Agregar Pago</span>
-            </button>
-        </div>
     </div>
 </div>
 
