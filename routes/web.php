@@ -56,6 +56,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     
     // Rutas para administradores
     Route::get('/admins', [UsersController::class, 'admin'])->name('users.admin');
+    Route::post('/admins', [UsersController::class, 'store'])->name('users.store');
     Route::delete('/admins/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+    Route::patch('/admins/{id}', [UsersController::class, 'update'])->name('users.update');
 });
-

@@ -80,7 +80,7 @@
         </table>
         {{-- Botón de agregar habitación --}}
         <div class="d-grid">
-            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalRoom">
+            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalAddRoom">
                 <span class="material-icons align-middle">add</span>
                 <span class="align-middle">Agregar Habitación</span>
             </button>
@@ -112,18 +112,18 @@
 </div>
 
 {{-- modal para agregar habitacion --}}
-<div class="modal fade" id="modalRoom" tabindex="-1" aria-labelledby="agregarLabel" aria-hidden="true">
+<div class="modal fade" id="modalAddRoom" tabindex="-1" aria-labelledby="agregarLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content bg-dark text-white">
             <form method="POST" action="{{ route('rooms.store') }}" enctype="multipart/form-data">
             @csrf
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="agregarLabel">Agregar habitacion</h1>
+                    <h1 class="modal-title fs-5" id="agregarLabel">Agregar Nueva Habitación</h1>
                     <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre de la habitacion</label>
+                        <label for="nombre" class="form-label">Nombre de la habitación</label>
                         <input id="nombre" name="nombre" type="text" class="form-control">
                         @error('nombre')
                             <small class="text-danger">{{ $message }}</small>
@@ -155,7 +155,7 @@
                         </div>
                         <div class="form-check">
                             <input id="television" name="television" class="form-check-input" type="checkbox">
-                            <label for="television" class="form-check-label">Television</label>
+                            <label for="television" class="form-check-label">Televisión</label>
                         </div>
                         <div class="form-check">
                             <input id="aireac" name="aireac" class="form-check-input" type="checkbox">
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripcion</label>
+                        <label for="descripcion" class="form-label">Descripción</label>
                         <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
                         @error('descripcion')
                             <small class="text-danger">{{ $message }}</small>
@@ -195,7 +195,7 @@
 @if ($errors->any())
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var modal = new bootstrap.Modal(document.getElementById('modalRoom'));
+            var modal = new bootstrap.Modal(document.getElementById('modalAddRoom'));
             modal.show();
         });
     </script>

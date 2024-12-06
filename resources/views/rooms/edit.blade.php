@@ -112,6 +112,5 @@
             button.closest('.col-3').style.opacity = '1';
         }
     }
-
 </script>
 @endsection
