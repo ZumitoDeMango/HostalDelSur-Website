@@ -4,7 +4,6 @@
 <div class="container my-5">
     <div class="col-12">
         <h1 class="text-center display-4 fw-bold mb-4">Sobre Nosotros</h1>
-        <p class="text-center text-muted fs-5">Descubre dónde encontrarnos en Talca, Maule</p>
     </div>
     <div class="col-12 mt-5">
         <p>
