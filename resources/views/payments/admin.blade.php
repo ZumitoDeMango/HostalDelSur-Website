@@ -46,7 +46,7 @@
                 <tr>
                     <td>{{ $payment->fecha_pago->format('d/m/Y') }}</td>
                     <td>{{ $payment->reservation->nombre }}</td>
-                    <td>${{ $payment->monto }}</td>
+                    <td>${{ number_format($payment->monto, 0, ',', '.') }}</td>
                     <td>{{ $payment->tipo_pago }}</td>
                     <td>
                         {{-- Botón para mostrar y cambiar el estado --}}
@@ -77,7 +77,7 @@
 </div>
 @if($filteredTotal > 0)
     <div class="alert alert-info text-center">
-        Total del mes: <strong>${{ $filteredTotal }}</strong>
+        Total del mes: <strong>${{ number_format($filteredTotal, 0, ',', '.') }}</strong>
     </div>
 @endif
 @endsection
