@@ -30,6 +30,7 @@ class CreateUserRequest extends FormRequest
             'name.required' => 'El nombre es obligatorio.',
             'email.required' => 'El correo es obligatorio.',
             'email.unique' => 'El correo ya está registrado.',
+            'email.email' => 'Por favor, ingrese un correo válido.',
             'password.required' => 'La contraseña es obligatoria.',
             'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
             'level.required' => 'El nivel es obligatorio.',

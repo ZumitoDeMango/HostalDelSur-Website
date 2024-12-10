@@ -18,8 +18,23 @@ class PaymentsController extends Controller
 {
     public function admin(Request $request)
     {
-        $payments = Payment::all();
-        return view('payments.admin', compact('payments'));
+        $allPayments = Payment::orderBy('fecha_pago')->get();
+        $months = $allPayments->pluck('fecha_pago')->unique()
+                    ->mapWithKeys(fn($date) => [Carbon::parse($date)->month => Carbon::parse($date)->locale('es')->monthName]);
+        $years = $allPayments->pluck('fecha_pago')->map(fn($date) => Carbon::parse($date)->year)->unique();
+
+        $query = Payment::query();
+        if ($request->filled('mes')) {
+            $query->whereMonth('fecha_pago', $request->mes);
+        }
+        if ($request->filled('anio')) {
+            $query->whereYear('fecha_pago', $request->anio);
+        }
+        $payments = $query->with('reservation')->get();
+
+        $filteredTotal = $payments->sum('monto');
+
+        return view('payments.admin', compact('payments', 'months', 'years', 'filteredTotal'));
     }
 
     public function form($id)

@@ -18,10 +18,10 @@
                     <tbody>
                         @foreach($stays as $stay)
                             <tr>
-                                <td>{{ $stay->room->nombre }}</td>
+                                {{-- <td>{{ $stay->room->nombre }}</td>
                                 <td>{{ $stay->reservation->nombre }}</td>
                                 <td>{{ $stay->fecha_inicio <= now() ? 'Entrada' : 'Salida' }}</td>
-                                <td>{{ $stay->fecha_inicio->format('d-m-Y') }}</td>
+                                <td>{{ $stay->fecha_inicio->format('d-m-Y') }}</td> --}}
                             </tr>
                         @endforeach
                     </tbody>

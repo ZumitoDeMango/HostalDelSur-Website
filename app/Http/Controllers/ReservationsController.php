@@ -79,4 +79,11 @@ class ReservationsController extends Controller
         $reservations = Reservation::all();
         return view('reservations.admin', compact('reservations'));
     }
+
+    public function destroy($id) 
+    {
+        $reservation = Reservation::findOrFail($id);
+        $reservation->delete();
+        return redirect()->route('reservations.admin');
+    }
 }

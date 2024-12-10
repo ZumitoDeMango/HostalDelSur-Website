@@ -11,7 +11,7 @@
                         @csrf
                         <div class="mb-3">
                         <label for="email" class="form-label text-center text-white">Correo</label>
-                        <input name="email" type="email" class="form-control" id="email" placeholder="ejemplo@correo.com">
+                        <input name="email" class="form-control" id="email" placeholder="ejemplo@correo.com">
                         </div>
                         
                         <div class="mb-3">

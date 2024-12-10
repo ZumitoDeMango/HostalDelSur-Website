@@ -19,7 +19,7 @@ class CreateReservationRequest extends FormRequest
             'correo' => 'required|email|max:320',
             'fono' => 'required|string|max:15',
             'info_adicional' => 'nullable|string|max:500',
-            'fechas' => 'required|string|regex:/^.+ hasta .+$/', // Validar rango de fechas
+            'fechas' => 'required|string|regex:/^.+ hasta .+$/',
             'room_id' => 'required|exists:rooms,id',
         ];
     }
@@ -30,6 +30,7 @@ class CreateReservationRequest extends FormRequest
             'rut_o_pasaporte.required' => 'El campo RUT o Pasaporte es obligatorio.',
             'nombre.required' => 'El nombre completo es obligatorio.',
             'correo.required' => 'El correo electrónico es obligatorio.',
+            'correo.email' => 'Por favor, ingrese un correo electrónico válido.',
             'fono.required' => 'El número de teléfono es obligatorio.',
             'fechas.required' => 'Sus fechas de entrada y salida son obligatorias.',
             'fechas.regex' => 'El formato de las fechas seleccionadas es inválido.',

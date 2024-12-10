@@ -47,7 +47,7 @@
                         </a>
                     </td>
                     <td>
-                        <form method="POST" action="{{-- {{ route('reservations.destroy', $reservation->id) }} --}}">
+                        <form method="POST" action="{{ route('reservations.destroy', $reservation->id) }}">
                             @csrf
                             @method("delete")
                             <button type="button" 
@@ -56,7 +56,7 @@
                                     data-bs-toggle="modal" 
                                     data-bs-target="#modalDelete"
                                     data-bs-reservation-id="{{ $reservation->id }}"
-                                    data-bs-action="{{-- {{ route('reservations.destroy', $reservation->id) }} --}}">
+                                    data-bs-action="{{ route('reservations.destroy', $reservation->id) }}">
                                 <span class="material-icons">delete</span>
                             </button>
                         </form>
