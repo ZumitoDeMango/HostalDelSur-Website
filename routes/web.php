@@ -52,6 +52,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     
     // Rutas para pagos
     Route::get('/pagos', [PaymentsController::class, 'admin'])->name('payments.admin');
+    Route::post('/pagos', [PaymentsController::class, 'admin'])->name('payments.admin');
     Route::delete('/pagos/{id}', [PaymentsController::class, 'destroy'])->name('payments.destroy');
     Route::patch('/pagos/{id}/toggle', [PaymentsController::class, 'toggleStat'])->name('payments.toggle');
     

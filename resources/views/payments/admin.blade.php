@@ -1,28 +1,24 @@
 @extends('templates.master')
 
 @section('main-content')
-<form method="GET" action="{{ route('payments.admin') }}" class="mt-2">
+<form method="POST" action="{{ route('payments.admin') }}" class="mt-2">
+    @csrf
     <div class="row align-items-end">
         <div class="col-md-4">
             <label for="mes" class="form-label">Mes</label>
-            <select id="mes" name="mes" class="form-select">
-                <option value="" selected>Todos</option>
+            <select id="mes" name="mes" class="form-select" onchange="this.form.submit()">
                 @foreach($months as $key => $month)
-                <option value="{{ $key }}" {{ request('mes') == $key ? 'selected' : '' }}>{{ $month }}</option>
+                <option value="{{ $key }}" {{ $selectedMonth == $key ? 'selected' : '' }}>{{ $month }}</option>
                 @endforeach
             </select>
         </div>
         <div class="col-md-4">
             <label for="anio" class="form-label">Año</label>
-            <select id="anio" name="anio" class="form-select">
-                <option value="" selected>Todos</option>
+            <select id="anio" name="anio" class="form-select" onchange="this.form.submit()">
                 @foreach($years as $year)
-                <option value="{{ $year }}" {{ request('anio') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>{{ $year }}</option>
                 @endforeach
             </select>
-        </div>
-        <div class="col-md-4">
-            <button type="submit" class="btn btn-primary">Filtrar</button>
         </div>
     </div>
 </form>

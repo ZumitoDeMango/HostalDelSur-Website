@@ -23,18 +23,24 @@ class PaymentsController extends Controller
                     ->mapWithKeys(fn($date) => [Carbon::parse($date)->month => Carbon::parse($date)->locale('es')->monthName]);
         $years = $allPayments->pluck('fecha_pago')->map(fn($date) => Carbon::parse($date)->year)->unique();
 
+        $currentMonth = now()->month;
+        $currentYear = now()->year;
+        $selectedMonth = $request->input('mes', $currentMonth);
+        $selectedYear = $request->input('anio', $currentYear);
+
         $query = Payment::query();
-        if ($request->filled('mes')) {
-            $query->whereMonth('fecha_pago', $request->mes);
+        if ($selectedMonth) {
+            $query->whereMonth('fecha_pago', $selectedMonth);
         }
-        if ($request->filled('anio')) {
-            $query->whereYear('fecha_pago', $request->anio);
+        if ($selectedYear) {
+            $query->whereYear('fecha_pago', $selectedYear);
         }
+
         $payments = $query->with('reservation')->get();
 
-        $filteredTotal = $payments->sum('monto');
+        $filteredTotal = $payments->where('estado', 'pagado')->sum('monto');
 
-        return view('payments.admin', compact('payments', 'months', 'years', 'filteredTotal'));
+        return view('payments.admin', compact('payments', 'months', 'years', 'filteredTotal', 'selectedMonth', 'selectedYear'));
     }
 
     public function form($id)
