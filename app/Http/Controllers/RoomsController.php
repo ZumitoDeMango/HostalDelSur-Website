@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
 use App\Models\Type;
+use App\Models\Stay;
 use App\Http\Requests\CreateRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
 
@@ -72,8 +73,13 @@ class RoomsController extends Controller
     public function destroy($id) 
     {
         $room = Room::findOrFail($id);
+        
+        if (Stay::where('habitacion', $room->id)->exists()) {
+            return redirect()->route('rooms.admin')->with('error', 'No se puede eliminar la habitación porque tiene reservas asociadas.');
+        }
+    
         $room->delete();
-        return redirect()->route('rooms.admin');
+        return redirect()->route('rooms.admin')->with('success', 'Habitación eliminada correctamente.');
     }
 
     public function edit($id)
