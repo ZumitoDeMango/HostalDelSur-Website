@@ -75,12 +75,14 @@ class RoomsController extends Controller
         $room->delete();
         return redirect()->route('rooms.admin');
     }
+
     public function edit($id)
     {
         $room = Room::findOrFail($id);
         $types = Type::all();
         return view('rooms.edit', compact('room', 'types'));
     }
+
     public function update(UpdateRoomRequest $request, $id)
     {
         $validated = $request->validated();
@@ -126,6 +128,7 @@ class RoomsController extends Controller
         $room->save();
         return redirect()->route('rooms.admin');
     }
+
     public function toggleDisp(Request $request, $id)
     {
         $room = Room::findOrFail($id);
@@ -135,5 +138,4 @@ class RoomsController extends Controller
 
         return redirect()->route('rooms.admin');
     }
-
 }

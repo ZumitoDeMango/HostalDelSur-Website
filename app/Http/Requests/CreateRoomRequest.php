@@ -14,7 +14,7 @@ class CreateRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|string|max:255',
+            'nombre' => 'required|string|unique:rooms,nombre|max:255',
             'tipo' => 'required|exists:types,id',
             'precio' => 'required|numeric|min:0',
             'descripcion' => 'required|string|max:1000',
@@ -28,6 +28,7 @@ class CreateRoomRequest extends FormRequest
     {
         return [
             'nombre.required' => 'Por favor, ingresa el nombre de la habitación.',
+            'nombre.unique' => 'Este nombre de habitación ya existe.',
             'tipo.exists' => 'Selecciona un tipo de habitación válido.',
             'precio.required' => 'El campo de precio es obligatorio.',
             'precio.numeric' => 'El precio debe ser un valor numérico válido.',
