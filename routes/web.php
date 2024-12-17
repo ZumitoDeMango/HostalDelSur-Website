@@ -23,8 +23,6 @@ Route::prefix('/')->group(function () {
     // Formularios
     Route::get('/reserva/{id}', [ReservationsController::class, 'form'])->name('reservations.form');
     Route::post('/reserva', [ReservationsController::class, 'store'])->name('reservations.store');
-    Route::get('/pago/{id}', [PaymentsController::class, 'form'])->name('payments.form');
-    Route::post('/pago', [PaymentsController::class, 'process'])->name('payments.process');
 });
 
 // Rutas Login Admin

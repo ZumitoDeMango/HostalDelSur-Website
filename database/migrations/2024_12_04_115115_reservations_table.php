@@ -44,6 +44,16 @@ return new class extends Migration
 
             $table->foreign('reserva')->references('id')->on('reservations')->onDelete('cascade');
         });
+        Schema::create('guests', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('reserva');
+            $table->string('rut_o_pasaporte');
+            $table->string('nombre');
+            $table->string('correo', 320);
+            $table->string('fono');
+
+            $table->foreign('reserva')->references('id')->on('reservations')->onDelete('cascade');
+        });
     }
 
     /**
@@ -51,6 +61,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('guests');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('stays');
         Schema::dropIfExists('reservations');
