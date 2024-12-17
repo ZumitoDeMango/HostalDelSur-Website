@@ -1,8 +1,8 @@
 @extends('templates.master')
 
 @section('main-content')
-    <div class="row mt-4">
-        <h5 class="text-center">Su mejor alternativa en Talca</h5>
+    <div class="row my-4">
+        <h1 class="text-center display-4 fw-bold">Su mejor alternativa en Talca</h1>
         <div id="carousel" class="carousel slide mt-4" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -10,6 +10,9 @@
                 </div>
                 <div class="carousel-item">
                     <img src="{{ asset("images/hab1.jpeg") }}" class="d-block w-100" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset("images/comedor2.jpg") }}" class="d-block w-100" alt="">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">

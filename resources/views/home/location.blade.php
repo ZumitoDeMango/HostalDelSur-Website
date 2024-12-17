@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('main-content')
-<div class="container my-5">
+<div class="container my-4">
     <div class="row">
         <div class="col-12">
             <h1 class="text-center display-4 fw-bold mb-4">Ubicación</h1>

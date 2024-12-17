@@ -5,7 +5,7 @@
 
 <div class="container mt-4">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card shadow-sm border-0 p-3 rounded">
                 <h5 class="text-center display-4 fw-bold mb-4">Información de Contacto</h5>
                 <div class="list-group">

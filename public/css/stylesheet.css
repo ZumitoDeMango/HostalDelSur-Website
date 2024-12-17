@@ -24,15 +24,21 @@
 }
 
 .image-container-logo {
-    width: 140px;
-    height: 50px;
+    width: 210px;
+    height: 80px;
     overflow: hidden;
+    position: relative;
 }
 
 .img-logo {
-    width: 100%;
+    width: 110%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .image-container-card {
