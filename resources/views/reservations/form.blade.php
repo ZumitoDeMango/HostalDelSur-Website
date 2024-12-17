@@ -60,11 +60,28 @@
                         </div>
 
                         <div>
+                            <input type="hidden" class="form-control" id="monto" name="monto">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="metodo_pago" class="form-label">Método de Pago</label>
+                            <select class="form-select" id="metodo_pago" name="metodo_pago">
+                                <option value="" selected>Selecciona un método</option>
+                                <option value="transferencia">Transferencia Bancaria</option>
+                                <option value="tarjeta">Tarjeta de Crédito/Débito</option>
+                                <option value="efectivo">Efectivo</option>
+                            </select>
+                            @error('metodo_pago')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div>
                             <input type="hidden" name="room_id" value="{{ $room->id }}">
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-success">Pagar</button>
+                            <button type="submit" class="btn btn-success">Reservar</button>
                             <a href="{{ route('rooms.index') }}" class="btn btn-danger text-white">Cancelar</a>
                         </div>
                     </form>
@@ -112,6 +129,7 @@
         const totalNochesSpan = document.getElementById('totalNoches');
         const precioTotalSpan = document.getElementById('precioTotal');
         const fechasInput = document.getElementById('fechas');
+        const montoInput = document.getElementById('monto'); // Campo monto a pagar
 
         // Obtener las fechas ocupadas desde PHP
         const occupiedDates = @json($occupiedDates);
@@ -137,10 +155,13 @@
 
                     // Calcular el precio total y formatearlo
                     const totalPrecio = totalNoches * precioPorNoche;
+                    const precioTotalFormateado = totalPrecio.toLocaleString('es-CL'); // Formato chileno
 
-                    // Usar toLocaleString para dar formato a la cantidad
-                    const precioTotalFormateado = totalPrecio.toLocaleString('es-CL'); // 'es-CL' para formato chileno
+                    // Actualizar la interfaz con los resultados
                     precioTotalSpan.textContent = precioTotalFormateado;
+
+                    // Rellenar automáticamente el campo "Monto a Pagar"
+                    montoInput.value = totalPrecio;
                 }
             }
         });

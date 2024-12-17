@@ -43,29 +43,6 @@ class PaymentsController extends Controller
         return view('payments.admin', compact('payments', 'months', 'years', 'filteredTotal', 'selectedMonth', 'selectedYear'));
     }
 
-    public function form($id)
-    {
-        $reservation = Reservation::find($id);
-        return view('payments.form', compact('reservation'));
-    }
-
-    public function process(CreatePaymentRequest $request)
-    {
-        $validated = $request->validated();
-
-        $reserva = Reservation::findOrFail($validated['reserva']);
-
-        Payment::create([
-            'reserva' => $reserva->id,
-            'monto' => $validated['monto'],
-            'tipo_pago' => $validated['metodo_pago'],
-            'estado' => 'sin validar',
-            'fecha_pago' => now(),
-        ]);
-
-        return redirect()->route('home.index');
-    }
-
     public function toggleStat($id)
     {
         $payment = Payment::findOrFail($id);

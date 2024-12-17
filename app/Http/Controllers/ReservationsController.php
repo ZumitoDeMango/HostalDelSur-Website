@@ -40,16 +40,17 @@ class ReservationsController extends Controller
     {
         $validated = $request->validated();
 
+        // extraer y procesar fechas
         [$startDate, $endDate] = explode(' hasta ', $validated['fechas']);
         $start = Carbon::createFromFormat('d-m-Y', $startDate);
         $end = Carbon::createFromFormat('d-m-Y', $endDate);
-
         $totalNoches = $start->diffInDays($end);
 
+        // obtener la habitacion y calcular precio total
         $room = Room::findOrFail($validated['room_id']);
-
         $totalPrecio = $totalNoches * $room->precio;
 
+        // crear la reserva
         $reservation = Reservation::create([
             'fecha_reserva' => now(),
             'rut_o_pasaporte' => $validated['rut_o_pasaporte'],
@@ -61,6 +62,7 @@ class ReservationsController extends Controller
             'total_precio' => $totalPrecio,
         ]);
 
+        // crear la estadia
         Stay::create([
             'reserva' => $reservation->id,
             'habitacion' => $room->id,
@@ -68,7 +70,16 @@ class ReservationsController extends Controller
             'fecha_fin' => $end,
         ]);
 
-        return redirect()->route('payments.form', ['id' => $reservation->id]);
+        // crear el pago
+        Payment::create([
+            'reserva' => $reservation->id,
+            'monto' => $validated['monto'],
+            'tipo_pago' => $validated['metodo_pago'],
+            'estado' => 'sin validar',
+            'fecha_pago' => now(),
+        ]);
+
+        return redirect()->route('home.index')->with('success', 'Reserva y pago realizados exitosamente.');
     }
 
     public function admin(Request $request)

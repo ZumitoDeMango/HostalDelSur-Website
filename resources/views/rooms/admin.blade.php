@@ -38,7 +38,7 @@
                 <tr>
                     <td>{{ $room->nombre }}</td>
                     <td>{{ $room->type->nombre }}</td>
-                    <td>${{ $room->precio }}</td>
+                    <td>${{ number_format($room->precio, 0, ',', '.') }}</td>
                     <td>
                         <form method="POST" action="{{ route('rooms.toggle', $room->id) }}">
                             @csrf
