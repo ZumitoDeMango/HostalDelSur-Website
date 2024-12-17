@@ -13,16 +13,6 @@
     border-color: goldenrod;
 }
 
-.btn-secondary {
-    background-color: gold;
-    border-color: gold;
-}
-
-.btn-secondary:hover {
-    background-color: goldenrod;
-    border-color: goldenrod;
-}
-
 .image-container-logo {
     width: 210px;
     height: 80px;
@@ -58,6 +48,11 @@
     object-fit: cover;
 }
 
+
+.img-carousel-home {
+    height: 600px;
+    object-fit: cover;
+}
 
 .img-carousel {
     height: 400px;

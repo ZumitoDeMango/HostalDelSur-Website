@@ -6,13 +6,19 @@
         <div id="carousel" class="carousel slide mt-4" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ asset("images/comedor1.jpg") }}" class="d-block w-100" alt="">
+                    <img src="{{ asset("images/hostal2.jpg") }}" class="d-block w-100 img-carousel-home" alt="">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset("images/hab1.jpeg") }}" class="d-block w-100" alt="">
+                    <img src="{{ asset("images/comedor1.jpg") }}" class="d-block w-100 img-carousel-home" alt="">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset("images/comedor2.jpg") }}" class="d-block w-100" alt="">
+                    <img src="{{ asset("images/hab1.jpeg") }}" class="d-block w-100 img-carousel-home" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset("images/comedor2.jpg") }}" class="d-block w-100 img-carousel-home" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset("images/comedor3.jpg") }}" class="d-block w-100 img-carousel-home" alt="">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
