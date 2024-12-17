@@ -52,7 +52,7 @@
                         {{-- Contenido principal del modal --}}
                         <div class="modal-body">
                             <div class="row">
-                                {{-- Columna izquierda: Información de la habitación --}}
+                                {{-- Info de la habitacion --}}
                                 <div class="col-lg-6 d-flex flex-column justify-content-center">
                                     <p>{{ $room->descripcion }}</p>
                                     <p>Se encuentra en el piso {{ $room->piso }}</p>
@@ -61,7 +61,7 @@
                                     <p>¿Aire acondicionado? {{ $room->aireac == '1' ? 'Sí tiene' : 'No tiene' }}</p>
                                 </div>
 
-                                {{-- Columna derecha: Carrusel de fotos --}}
+                                {{-- Carrusel de fotos --}}
                                 <div class="col-lg-6">
                                     <div id="carouselRoom{{ $room->id }}" class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
@@ -89,14 +89,13 @@
                                 </div>
                             </div>
 
-                            {{-- Imagen ampliada (superposición) --}}
+                            {{-- Imagen ampliada --}}
                             <div class="full-image-overlay d-none">
                                 <img id="fullImage" src="" class="img-fluid" alt="Imagen completa">
                                 <button type="button" class="btn btn-light btn-close-overlay" onclick="hideFullImage()">Cerrar</button>
                             </div>
                         </div>
 
-                        {{-- Pie de página del modal --}}
                         <div class="modal-footer bg-dark text-white">
                             <div class="d-grid">
                                 <a href="{{ route('reservations.form', ['id' => $room->id]) }}" class="btn btn-primary">Reservar</a>
@@ -105,8 +104,6 @@
                     </div>
                 </div>
             </div>
-
-
             @endforeach
         </div>
     </div>

@@ -1,5 +1,5 @@
 <?php
-/* Route::get()->name(); */
+/* Route::get('', [Controller::class, ''])->name(''); */
 /* @dd($rooms); */
 
 use Illuminate\Support\Facades\Route;
@@ -37,7 +37,7 @@ Route::prefix('/')->group(function () {
 // Rutas Dashboard Admin (con middleware de autenticación)
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
+    
     // Rutas habitaciones
     Route::get('/habitaciones', [RoomsController::class, 'admin'])->name('rooms.admin');
     Route::post('/habitaciones', [RoomsController::class, 'store'])->name('rooms.store');
@@ -48,6 +48,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     
     // Rutas para reservas
     Route::get('/reservas', [ReservationsController::class, 'admin'])->name('reservations.admin');
+    Route::get('/reservas/{id}/show', [ReservationsController::class, 'show'])->name('reservations.show');
     Route::delete('/reservas/{id}', [ReservationsController::class, 'destroy'])->name('reservations.destroy');
     
     // Rutas para pagos

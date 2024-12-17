@@ -29,7 +29,7 @@
 
                         <div class="mb-3">
                             <label for="correo" class="form-label">Correo Electrónico</label>
-                            <input id="correo" name="correo" type="email" class="form-control">
+                            <input id="correo" name="correo" type="text" class="form-control">
                             @error('correo')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror

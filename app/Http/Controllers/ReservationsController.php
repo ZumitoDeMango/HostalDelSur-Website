@@ -10,6 +10,7 @@ use App\Models\Room;
 use App\Models\Type;
 use App\Models\Reservation;
 use App\Models\Stay;
+use App\Models\Payment;
 use App\Http\Requests\CreateReservationRequest;
 use Carbon\Carbon;
 
@@ -19,23 +20,19 @@ class ReservationsController extends Controller
     {
         $room = Room::findOrFail($id);
 
-        // Obtener todas las estancias asociadas a la habitación
         $stays = Stay::where('habitacion', $id)->get();
 
-        // Crear un array de rangos ocupados
         $occupiedDates = [];
         foreach ($stays as $stay) {
             $start = Carbon::parse($stay->fecha_inicio);
             $end = Carbon::parse($stay->fecha_fin);
 
-            // Añadir cada día en el rango a un array
             while ($start <= $end) {
                 $occupiedDates[] = $start->format('d-m-Y');
                 $start->addDay();
             }
         }
 
-        // Pasar las fechas ocupadas a la vista
         return view('reservations.form', compact('room', 'occupiedDates'));
     }
 
@@ -77,7 +74,21 @@ class ReservationsController extends Controller
     public function admin(Request $request)
     {
         $reservations = Reservation::all();
-        return view('reservations.admin', compact('reservations'));
+        $stays = Stay::all();
+        return view('reservations.admin', compact('reservations', 'stays'));
+    }
+
+    public function show($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $stays = Stay::where('reserva', $id)->with('room')->get();
+        $payments = Payment::where('reserva', $id)->get();
+
+        return view('reservations.show', [
+            'reservation' => $reservation,
+            'stays' => $stays,
+            'payments' => $payments,
+        ]);
     }
 
     public function destroy($id) 
