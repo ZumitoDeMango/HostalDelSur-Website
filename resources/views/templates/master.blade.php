@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     </head>
-    <body>
+    <body class="d-flex flex-column min-vh-100">
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container">
@@ -72,12 +72,17 @@
                 </div>
             </nav>
         </header>
-        <main>
+        <main class="flex-grow-1">
             <div class="container">
                 @yield('main-content')
             </div>
         </main>
         <footer>
+            <div class="bg-dark text-light py-3">
+                <div class="col text-center">
+                    <p>&copy; {{ date('Y') }} Hostal del Sur. Todos los derechos reservados.</p>
+                </div>
+            </div>
         </footer>
         <!-- Bootstrap JavaScript Libraries -->
         <script
