@@ -36,4 +36,9 @@ class Reservation extends Model
     {
         return $this->hasMany(Payment::class, 'reserva');
     }
+
+    public function guests()
+    {
+        return $this->hasMany(Guest::class, 'reserva');
+    }
 }
