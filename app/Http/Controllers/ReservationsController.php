@@ -97,9 +97,39 @@ class ReservationsController extends Controller
 
     public function admin(Request $request)
     {
-        $reservations = Reservation::all();
+        // Obtener las fechas actuales de mes y año
+        $currentMonth = now()->month;
+        $currentYear = now()->year;
+
+        // Obtener los valores de mes y año seleccionados en el request, o los valores actuales por defecto
+        $selectedMonth = $request->input('mes', $currentMonth);
+        $selectedYear = $request->input('anio', $currentYear);
+
+        // Crear la consulta base de las reservas
+        $query = Reservation::query();
+
+        // Filtrar por mes si se ha seleccionado
+        if ($selectedMonth) {
+            $query->whereMonth('fecha_reserva', $selectedMonth);
+        }
+
+        // Filtrar por año si se ha seleccionado
+        if ($selectedYear) {
+            $query->whereYear('fecha_reserva', $selectedYear);
+        }
+
+        // Obtener las reservas filtradas
+        $reservations = $query->get();
+
+        // Obtener las estancias relacionadas
         $stays = Stay::all();
-        return view('reservations.admin', compact('reservations', 'stays'));
+
+        // Opcionalmente, si quieres pasar los meses y años disponibles para el filtrado (como en los pagos):
+        $months = Reservation::pluck('fecha_reserva')->unique()
+            ->mapWithKeys(fn($date) => [Carbon::parse($date)->month => Carbon::parse($date)->locale('es')->monthName]);
+        $years = Reservation::pluck('fecha_reserva')->map(fn($date) => Carbon::parse($date)->year)->unique();
+
+        return view('reservations.admin', compact('reservations', 'stays', 'months', 'years', 'selectedMonth', 'selectedYear'));
     }
 
     public function show($id)

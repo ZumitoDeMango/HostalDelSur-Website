@@ -1,8 +1,29 @@
 @extends('templates.master')
 
 @section('main-content')
+<form method="GET" action="{{ route('reservations.admin') }}" class="mt-2">
+    @csrf
+    <div class="row align-items-end">
+        <div class="col-md-4">
+            <label for="mes" class="form-label">Mes</label>
+            <select id="mes" name="mes" class="form-select" onchange="this.form.submit()">
+                @foreach($months as $key => $month)
+                <option value="{{ $key }}" {{ $selectedMonth == $key ? 'selected' : '' }}>{{ $month }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="anio" class="form-label">Año</label>
+            <select id="anio" name="anio" class="form-select" onchange="this.form.submit()">
+                @foreach($years as $year)
+                <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>{{ $year }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+</form>
 {{-- Tabla de Reservas --}}
-<div class="card text-white bg-dark mt-4">
+<div class="card text-white bg-dark mt-4 mb-4">
     <div class="card-body">
         <h3 class="card-title text-center mb-3">RESERVAS</h3>
         {{-- Tabla de reservas --}}
