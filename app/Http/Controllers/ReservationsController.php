@@ -92,7 +92,7 @@ class ReservationsController extends Controller
             ]);
         }
 
-        return redirect()->route('home.index')->with('success', 'Reserva y pago realizados exitosamente.');
+        return redirect()->route('home.index');
     }
 
     public function admin(Request $request)
@@ -107,11 +107,13 @@ class ReservationsController extends Controller
         $reservation = Reservation::findOrFail($id);
         $stays = Stay::where('reserva', $id)->with('room')->get();
         $payments = Payment::where('reserva', $id)->get();
+        $guests = Guest::where('reserva', $id)->get();
 
         return view('reservations.show', [
             'reservation' => $reservation,
             'stays' => $stays,
             'payments' => $payments,
+            'guests' => $guests,
         ]);
     }
 

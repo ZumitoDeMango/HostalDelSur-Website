@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('main-content')
-<div class="card text-white bg-dark mt-4">
+<div class="card text-white bg-dark mt-4 mb-4">
     <div class="card-body">
         <form method="POST" action="{{ route('rooms.update', $room->id) }}" enctype="multipart/form-data">
         @csrf

@@ -21,6 +21,34 @@
     </div>
 
     <div class="card mt-4">
+        <div class="card-header bg-dark text-white">
+            <h3>Huéspedes</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Rut o Pasaporte</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Fono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($guests as $guest)
+                        <tr>
+                            <td>{{ $guest->rut_o_pasaporte }}</td>
+                            <td>{{ $guest->nombre }}</td>
+                            <td>{{ $guest->correo }}</td>
+                            <td>{{ $guest->fono }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mt-4">
         <div class="card-header bg-secondary text-white">
             <h3>Detalles de la Estancia</h3>
         </div>
