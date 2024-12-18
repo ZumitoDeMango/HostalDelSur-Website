@@ -11,6 +11,36 @@ class CreateReservationRequest extends FormRequest
         return true;
     }
 
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $roomId = $this->input('room_id');
+
+            // Obtener la habitación con su tipo
+            $room = \App\Models\Room::with('type')->find($roomId);
+
+            if ($room && $room->type) {
+                // Mapear tipos de habitación a capacidades máximas
+                $maxGuestsByType = [
+                    'Single' => 1,
+                    'Twin' => 2,
+                    'Doble' => 2,
+                    'Triple' => 3,
+                    'Cuadruple' => 4,
+                ];
+
+                // Determinar el máximo permitido basado en el tipo
+                $maxGuests = $maxGuestsByType[$room->type->nombre] ?? 5; // Por defecto 5 si no está definido
+
+                // Validar el número de huéspedes
+                $guests = $this->input('guests');
+                if (is_array($guests) && count($guests) > $maxGuests) {
+                    $validator->errors()->add('guests', "El número máximo de huéspedes permitidos para una habitación de tipo '{$room->type->nombre}' es $maxGuests.");
+                }
+            }
+        });
+    }
+
     public function rules(): array
     {
         return [
@@ -25,7 +55,7 @@ class CreateReservationRequest extends FormRequest
             'monto' => 'required|numeric|min:0',
             'metodo_pago' => 'required|string|in:transferencia,tarjeta,efectivo',
 
-            'guests' => 'required',
+            'guests' => 'required|array',
         ];
     }
 
