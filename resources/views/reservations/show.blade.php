@@ -2,6 +2,11 @@
 
 @section('main-content')
 <div class="container mt-4 mb-4">
+    <div class="row">
+        <div class="col text-end">
+            <a href="{{ route('reservations.admin') }}" class="btn btn-danger text-white">Regresar</a>
+        </div>
+    </div>
     <h1 class="text-center">Resumen de Reserva</h1>
     <div class="card mt-4">
         <div class="card-header bg-primary text-white">

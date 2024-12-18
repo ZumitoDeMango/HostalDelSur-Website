@@ -15,12 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
         });
-        Schema::create('services', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->string('descripcion');
-            $table->string('precio');
-        });
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
@@ -44,7 +38,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('rooms');
-        Schema::dropIfExists('services');
         Schema::dropIfExists('types');
     }
 };

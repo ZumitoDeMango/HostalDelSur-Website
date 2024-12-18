@@ -12,7 +12,6 @@
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>Nivel</th>
-                    <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>
@@ -23,20 +22,6 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->level }}</td>
-                    <td>
-                        {{-- Verificamos si el usuario tiene permisos para editar --}}
-                        @if(Auth::user()->level >= 3 || Auth::user()->id == $user->id)
-                            <a href="{{-- {{ route('users.edit', $user->id) }} --}}" 
-                               class="btn btn-sm btn-warning text-white" 
-                               title="Editar">
-                                <span class="material-icons">edit</span>
-                            </a>
-                        @else
-                            <button class="btn btn-sm btn-warning text-white" disabled>
-                                <span class="material-icons">edit</span>
-                            </button>
-                        @endif
-                    </td>
                     <td>
                         {{-- Verificamos que no sea el mismo usuario y que tenga permisos para eliminar --}}
                         @if(Auth::user()->level >= 3 && Auth::user()->id != $user->id)

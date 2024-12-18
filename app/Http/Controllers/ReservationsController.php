@@ -92,7 +92,12 @@ class ReservationsController extends Controller
             ]);
         }
 
-        return redirect()->route('home.index');
+        return redirect()->route('home.index')->with('success', [
+            'message' => 'Su reserva ha quedado registrada correctamente.',
+            'habitacion' => $room->nombre,
+            'fecha_inicio' => $start->format('d-m-Y'),
+            'fecha_fin' => $end->format('d-m-Y'),
+        ]);        
     }
 
     public function admin(Request $request)
@@ -149,22 +154,14 @@ class ReservationsController extends Controller
 
     public function destroy($id) 
     {
-        // Buscar la reserva por su ID
         $reservation = Reservation::findOrFail($id);
 
-        // Eliminar todos los huéspedes relacionados (guests)
         $reservation->guests()->delete();
-
-        // Eliminar todas las estadías relacionadas (stays)
         $reservation->stays()->delete();
-
-        // Eliminar todos los pagos relacionados (payments)
         $reservation->payments()->delete();
 
-        // Eliminar la reserva en sí
         $reservation->delete();
 
-        // Redirigir al administrador de reservas con un mensaje de éxito
         return redirect()->route('reservations.admin');
     }
 }
