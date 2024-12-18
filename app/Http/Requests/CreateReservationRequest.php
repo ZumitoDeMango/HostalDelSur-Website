@@ -21,8 +21,11 @@ class CreateReservationRequest extends FormRequest
             'info_adicional' => 'nullable|string|max:500',
             'fechas' => 'required|string|regex:/^.+ hasta .+$/',
             'room_id' => 'required|exists:rooms,id',
+
             'monto' => 'required|numeric|min:0',
             'metodo_pago' => 'required|string|in:transferencia,tarjeta,efectivo',
+
+            'guests' => 'required',
         ];
     }
 
@@ -37,9 +40,12 @@ class CreateReservationRequest extends FormRequest
             'fechas.required' => 'Sus fechas de entrada y salida son obligatorias.',
             'fechas.regex' => 'El formato de las fechas seleccionadas es inválido.',
             'room_id.exists' => 'La habitación seleccionada no existe.',
+            
             'monto.required' => 'El monto a pagar es obligatorio.',
             'metodo_pago.required' => 'El método de pago es obligatorio.',
             'metodo_pago.in' => 'El método de pago seleccionado no es válido.',
+
+            'guests.required' => 'Tiene que existir al menos un huésped.',
         ];
     }
 }

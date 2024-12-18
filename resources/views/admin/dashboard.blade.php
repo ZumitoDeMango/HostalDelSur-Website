@@ -5,24 +5,33 @@
     <div class="col-6">
         <div class="card text-white bg-dark">
             <div class="card-body">
-                <h4 class="card-title mb-3 text-center">CHECK-IN Y CHECK-OUT</h4>
+                <h4 class="card-title mb-3 text-center">CHECK-IN Y CHECK-OUT DEL DÍA</h4>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Nombre habitación</th>
-                            <th>Nombre huésped</th>
+                            <th>Habitación</th>
+                            <th>Cliente</th>
                             <th>Acción</th>
                             <th>Fecha</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($stays as $stay)
-                            <tr>
-                                <td>{{ $stay->room->nombre }}</td>
-                                <td>{{ $stay->reservation->nombre }}</td>
-                                <td>{{ $stay->fecha_inicio <= now() ? 'Entra' : 'Sale' }}</td>
-                                <td>{{ $stay->fecha_inicio->format('d-m-Y') }}</td>
-                            </tr>
+                            @if ($stay->fecha_inicio <= now() && $stay->fecha_fin >= now())
+                                <tr>
+                                    <td>{{ $stay->room->nombre }}</td>
+                                    <td>{{ $stay->reservation->nombre }}</td>
+                                    <td>Entra</td>
+                                    <td>{{ $stay->fecha_inicio->format('d-m-Y') }}</td>
+                                </tr>
+                            @elseif ($stay->fecha_fin < now())
+                                <tr>
+                                    <td>{{ $stay->room->nombre }}</td>
+                                    <td>{{ $stay->reservation->nombre }}</td>
+                                    <td>Sale</td>
+                                    <td>{{ $stay->fecha_fin->format('d-m-Y') }}</td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

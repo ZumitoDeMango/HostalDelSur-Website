@@ -10,6 +10,7 @@ use App\Models\Room;
 use App\Models\Type;
 use App\Models\Reservation;
 use App\Models\Stay;
+use App\Models\Guest;
 use App\Models\Payment;
 use App\Http\Requests\CreateReservationRequest;
 use Carbon\Carbon;
@@ -22,6 +23,7 @@ class ReservationsController extends Controller
 
         $stays = Stay::where('habitacion', $id)->get();
 
+        // fechas ocupadas
         $occupiedDates = [];
         foreach ($stays as $stay) {
             $start = Carbon::parse($stay->fecha_inicio);
@@ -78,6 +80,17 @@ class ReservationsController extends Controller
             'estado' => 'sin validar',
             'fecha_pago' => now(),
         ]);
+
+        // crear huespedes
+        foreach ($validated['guests'] as $guestData) {
+            $guest = Guest::create([
+                'reserva' => $reservation->id,
+                'rut_o_pasaporte' => $guestData['rut_o_pasaporte'],
+                'nombre' => $guestData['nombre'],
+                'correo' => $guestData['correo'],
+                'fono' => $guestData['fono'],
+            ]);
+        }
 
         return redirect()->route('home.index')->with('success', 'Reserva y pago realizados exitosamente.');
     }
