@@ -4,11 +4,10 @@
 <div class="container my-4">
     <div class="row">
         <div class="col-12">
-            <h1 class="text-center display-4 fw-bold mb-4">Ubicación</h1>
-            <p class="text-center text-muted fs-5">Descubre dónde encontrarnos en Talca, Maule</p>
+            <h1 class="text-center display-4 fw-bold">Ubicación</h1>
         </div>
     </div>
-    <div class="row align-items-center mt-5">
+    <div class="row align-items-center mt-4">
         <!-- Información y foto -->
         <div class="col-lg-6">
             <div class="p-4 border rounded shadow-sm">
